@@ -7,52 +7,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #000000;
+            --navy: #1a2a44; /* כחול עמוק ואלגנטי */
+            --gold: #c5a059; /* זהב מעודן, לא צעקני */
+            --gold-hover: #b38f4d;
             --bg: #ffffff;
-            --light-gray: #f9f9f9;
-            --accent-green: #25d366;
-            --text-muted: #555;
+            --light-bg: #f8f9fa;
+            --text-dark: #1a2a44;
+            --text-muted: #5a6a82;
+            --whatsapp: #25d366;
         }
 
         body {
             font-family: 'Assistant', sans-serif;
             margin: 0;
             padding: 0;
-            color: var(--primary);
+            color: var(--text-dark);
             background-color: var(--bg);
             line-height: 1.6;
         }
 
         /* Header */
         header {
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             background: #fff;
+            border-bottom: 3px solid var(--gold); /* פס זהב דק למעלה */
         }
 
         .logo {
-            max-width: 220px;
+            max-width: 200px;
             height: auto;
         }
 
         /* Hero Section */
         .hero {
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
-            background-color: var(--light-gray);
+            background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
+            color: #fff;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 20px;
             font-weight: 700;
+            letter-spacing: -1px;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
+            font-size: 1.3rem;
+            color: #d1d9e6;
             max-width: 700px;
             margin: 0 auto 40px;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #fff;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-hover);
+            transform: translateY(-2px);
         }
 
         /* About Section */
@@ -72,17 +96,25 @@
             width: 350px;
             height: 450px;
             object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 15px 15px 0px var(--primary);
-        }
-
-        .about-text {
-            flex: 1;
+            border-radius: 4px;
+            border-right: 15px solid var(--gold); /* מסגרת זהב בצד התמונה */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
         .about-text h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            color: var(--navy);
             margin-bottom: 20px;
+            position: relative;
+        }
+
+        .about-text h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--gold);
+            margin-top: 10px;
         }
 
         /* Gallery Grid */
@@ -97,79 +129,77 @@
             width: 100%;
             height: 280px;
             object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
+            object-position: center;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            filter: grayscale(20%);
         }
 
+        /* התיקון הספציפי לתמונה השלישית */
         .gallery-item:last-child img {
             object-position: top center;
         }
 
         .gallery-item img:hover {
-            transform: translateY(-5px);
+            filter: grayscale(0%);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
         /* Calendly Section */
         .booking-section {
             padding: 80px 20px;
-            background-color: var(--light-gray);
+            background-color: var(--light-bg);
             text-align: center;
         }
 
-        /* Floating WhatsApp */
+        .booking-section h2 {
+            color: var(--navy);
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* WhatsApp Button */
         .whatsapp-float {
             position: fixed;
             width: 65px;
             height: 65px;
             bottom: 40px;
             left: 40px;
-            background-color: var(--accent-green);
+            background-color: var(--whatsapp);
             color: #FFF;
             border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 2px 4px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             z-index: 1000;
-            text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 2px 4px 20px rgba(0,0,0,0.25);
-        }
+        .whatsapp-float:hover { transform: scale(1.15); }
 
         footer {
-            padding: 50px 20px;
+            padding: 60px 20px;
             text-align: center;
-            border-top: 1px solid #eee;
-            color: #999;
+            background: var(--navy);
+            color: #fff;
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        footer p { opacity: 0.7; }
+
+        /* Mobile Adjustments */
         @media (max-width: 900px) {
-            .about-container {
-                flex-direction: column;
-                text-align: center;
+            .about-container { flex-direction: column; text-align: center; }
+            .about-text h2::after { margin: 10px auto; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-image img { width: 100%; border-right: none; border-bottom: 10px solid var(--gold); }
+            
+            .gallery-item:last-child img {
+                object-position: top center !important;
             }
-            .about-image img {
-                width: 100%;
-                max-width: 400px;
-                height: auto;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-item img {
-        height: 350px; /* נותן קצת יותר גובה בטלפון כדי שהתמונה תיראה טוב */
-        }
-        /* התיקון הקריטי לטלפון - מוודא שהתמונה השלישית נשארת צמודה למעלה */
-        .gallery-item:last-child img {
-            object-position: top center !important;
-    }
-            .hero h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -181,8 +211,8 @@
 
     <section class="hero">
         <h1>העתיד הפנסיוני שלך בידיים טובות</h1>
-        <p>תכנון פיננסי חכם ומותאם אישית שמאפשר לך לישון בשקט היום, ולפרוש בכבוד מחר.</p>
-        <a href="#booking" style="background: var(--primary); color: #fff; padding: 15px 35px; text-decoration: none; border-radius: 5px; font-weight: 600;">לקביעת פגישה ביומן</a>
+        <p>מומחיות בייעוץ פנסיוני, אסטרטגיית פרישה וניהול סיכונים. תכנון חכם שמתחיל עוד היום.</p>
+        <a href="#booking" class="btn-gold">לקביעת פגישה אישית</a>
     </section>
 
     <section class="about-section">
@@ -192,13 +222,8 @@
             </div>
             <div class="about-text">
                 <h2>נעים מאוד, ברוך ברגר</h2>
-                <p>
-                    כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. 
-                    העבודה שלי היא לוודא שהכסף שאתם חוסכים היום יעבוד בשבילכם בצורה המיטבית בעתיד, תוך ניצול מקסימלי של הטבות מס והתאמת רמת הסיכון למטרות שלכם.
-                </p>
-                <p>
-                    אני מאמין בשקיפות מלאה, מקצועיות ללא פשרות ובגובה העיניים. עולם הפנסיה יכול להיות מסובך - אני כאן כדי לעשות לכם סדר.
-                </p>
+                <p>כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. העבודה שלי היא לוודא שהכסף שאתם חוסכים היום יעבוד בשבילכם בצורה המיטבית בעתיד.</p>
+                <p>אני מאמין ששילוב של מקצועיות פיננסית עם שקיפות מלאה הוא המפתח לשקט הנפשי שלך. אני כאן כדי להפוך את המורכבות הפנסיונית לתוכנית פעולה ברורה.</p>
             </div>
         </div>
 
@@ -210,8 +235,7 @@
     </section>
 
     <section id="booking" class="booking-section">
-        <h2 style="margin-bottom: 40px;">קביעת פגישת ייעוץ</h2>
-        
+        <h2>קביעת פגישת ייעוץ ביומן</h2>
         <div class="calendly-inline-widget" data-url="https://calendly.com/barouch44/30min" style="min-width:320px;height:700px;"></div>
         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </section>
@@ -224,10 +248,7 @@
 
     <footer>
         <p>© 2026 ברוך ברגר - ייעוץ פנסיוני. כל הזכויות שמורות.</p>
-        <p>נבנה באהבה על ידי החבר הכי טוב שלו.</p>
     </footer>
 
 </body>
 </html>
-
-
