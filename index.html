@@ -162,6 +162,13 @@
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
+            .gallery-item img {
+        height: 350px; /* נותן קצת יותר גובה בטלפון כדי שהתמונה תיראה טוב */
+        }
+        /* התיקון הקריטי לטלפון - מוודא שהתמונה השלישית נשארת צמודה למעלה */
+        .gallery-item:last-child img {
+            object-position: top center !important;
+    }
             .hero h1 { font-size: 2.2rem; }
         }
     </style>
@@ -222,4 +229,5 @@
 
 </body>
 </html>
+
 
