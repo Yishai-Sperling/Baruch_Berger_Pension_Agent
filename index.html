@@ -6,10 +6,10 @@
     <title>ברוך ברגר | ייעוץ פנסיוני וביטוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* הגדרת מרחק גלילה למניעת חיתוך התמונה */
+        /* הגדרת מרחק גלילה אחיד */
         html { 
             scroll-behavior: smooth; 
-            scroll-padding-top: 5px; 
+            scroll-padding-top: 10px; 
         }
         
         :root {
@@ -30,12 +30,12 @@
             line-height: 1.6;
         }
 
-        /* Header דק ואלגנטי בגובה 70 פיקסלים */
+        /* Header דק ואלגנטי - שורה אחת תמיד */
         nav {
             position: sticky;
             top: 0;
             background: rgba(255, 255, 255, 0.98);
-            padding: 0 40px;
+            padding: 0 20px;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
             z-index: 1000;
             display: flex;
@@ -47,17 +47,17 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            height: 100%;
+            flex-shrink: 0;
         }
 
         .nav-logo img {
-            height: 55px; /* מותאם לגובה ה-header החדש */
+            height: 50px; 
             width: auto;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             list-style: none;
             margin: 0;
             padding: 0;
@@ -67,8 +67,9 @@
             text-decoration: none;
             color: var(--navy);
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: color 0.3s;
+            white-space: nowrap; /* מונע מהטקסט לרדת שורה */
         }
 
         .nav-links a:hover { color: var(--gold); }
@@ -82,7 +83,7 @@
 
         /* Hero */
         .hero {
-            padding: 90px 20px;
+            padding: 80px 20px;
             text-align: center;
             background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
             color: #fff;
@@ -103,13 +104,13 @@
 
         /* Section Styling */
         section { 
-            padding: 80px 20px; 
+            padding: 60px 20px; 
             max-width: 1100px; 
             margin: 0 auto;
-            scroll-margin-top: 5px; /* תואם לגובה ה-Header */
+            scroll-margin-top: 10px;
         }
 
-        .content-flex { display: flex; align-items: center; gap: 60px; }
+        .content-flex { display: flex; align-items: center; gap: 40px; }
         .content-flex.reverse { flex-direction: row-reverse; }
         
         .section-image img {
@@ -118,40 +119,49 @@
             box-shadow: 12px 12px 0 var(--gold);
         }
 
-        /* תיקון הראש של ברוך */
         .first-image img { object-position: top center !important; }
 
-        .section-text h2 { font-size: 2.3rem; color: var(--navy); margin-bottom: 20px; }
-        .section-text h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin-top: 15px; }
+        .section-text h2 { font-size: 2.1rem; color: var(--navy); margin-bottom: 15px; }
+        .section-text h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin-top: 10px; }
 
-        .check-list { list-style: none; padding: 0; margin: 25px 0; }
-        .check-list li { position: relative; padding-right: 35px; margin-bottom: 12px; font-weight: 500; font-size: 1.1rem; }
-        .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
+        .check-list { list-style: none; padding: 0; margin: 20px 0; }
+        .check-list li { position: relative; padding-right: 30px; margin-bottom: 10px; font-weight: 500; }
+        .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; }
 
         .highlight-box {
-            background: var(--light-bg); padding: 25px; border-right: 6px solid var(--gold);
-            margin-top: 25px; font-style: italic; border-radius: 0 4px 4px 0;
+            background: var(--light-bg); padding: 20px; border-right: 6px solid var(--gold);
+            margin-top: 20px; font-style: italic; border-radius: 0 4px 4px 0;
         }
 
         #booking { background: var(--light-bg); max-width: 100%; text-align: center; }
 
         .whatsapp-float {
-            position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px;
+            position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px;
             background: var(--whatsapp); color: #fff; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000;
-            transition: transform 0.3s;
         }
-        .whatsapp-float:hover { transform: scale(1.1); }
 
-        footer { background: var(--navy); color: #fff; padding: 40px; text-align: center; }
+        footer { background: var(--navy); color: #fff; padding: 30px; text-align: center; }
 
-        @media (max-width: 900px) {
-            nav { height: auto; padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .nav-links { gap: 15px; font-size: 0.95rem; flex-wrap: wrap; justify-content: center; }
+        /* התאמה לנייד - שומר על שורה אחת */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 15px;
+                height: 70px; /* גובה זהה למחשב כדי שהגלילה תהיה מדויקת */
+            }
+            .nav-logo img {
+                height: 40px; /* לוגו מעט קטן יותר כדי לפנות מקום */
+            }
+            .nav-links {
+                gap: 10px; /* צמצום רווחים בין הקישורים */
+            }
+            .nav-links a {
+                font-size: 0.85rem; /* טקסט קטן יותר כדי שייכנס בשורה אחת */
+            }
             .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; }
-            .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 10px solid var(--gold); }
-            .section-text h2::after { margin: 15px auto; }
+            .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
+            .section-text h2::after { margin: 10px auto; }
             .check-list li { text-align: right; }
         }
     </style>
@@ -164,10 +174,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="#about">אודות</a></li>
-            <li><a href="#coverage">ביטוחי בריאות</a></li>
-            <li><a href="#details">מה כוללת הפגישה</a></li>
-            <li><a href="#booking">קביעת פגישה</a></li>
-        </ul>
+            <li><a href="#coverage">ביטוחי בריאות</a></li> <li><a href="#details">הפגישה</a></li> <li><a href="#booking">קביעת פגישה</a></li> </ul>
     </nav>
 
     <section class="hero">
@@ -185,7 +192,7 @@
             </div>
             <div class="section-text">
                 <h2>נעים מאוד, ברוך ברגר</h2>
-                <p>כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. הליווי שלי מבוסס על הבנה עמיקה של הצרכים האישיים שלכם ובניית שקט נפשי לטווח ארוך.</p>
+                <p>כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. הליווי שלי מבוסס על הבנה עמוקה של הצרכים האישיים שלכם ובניית שקט נפשי לטווח ארוך.</p>
             </div>
         </div>
     </section>
@@ -211,8 +218,8 @@
                 <h2>מה כוללת הפגישה?</h2>
                 <ul class="check-list">
                     <li>בחינת קרנות פנסיה, קופות גמל וביטוחי מנהלים.</li>
-                    <li>ניתוח דמי ניהול והשפעתם המצטברת לאורך השנים.</li>
-                    <li>התאמת מסלולי השקעה לרמת הסיכון ולשלב החיים.</li>
+                    <li>ניתוח דמי ניהול והשפעתם המצטברת.</li>
+                    <li>התאמת מסלולי השקעה לרמת הסיכון.</li>
                     <li>איתור כפל ביטוחים והוצאות מיותרות.</li>
                     <li>בחינת מבנה ביטוחי החיים הקיימים.</li>
                 </ul>
@@ -227,7 +234,7 @@
         <div class="fade-in">
             <h2>קביעת פגישת ייעוץ</h2>
             <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">
-                הפגישה מתקיימת <strong>ללא עלות וללא התחייבות</strong>. ניתן לקבוע מועד ישירות בלוח השנה. אני אשמח לעמוד לרשותך ולוודא שהתיק שלך מנוהל בצורה החכמה ביותר.
+                הפגישה מתקיימת <strong>ללא עלות וללא התחייבות</strong>. ניתן לקבוע מועד ישירות בלוח השנה.
             </p>
             <div class="calendly-inline-widget" data-url="https://calendly.com/barouch44/30min" style="min-width:320px;height:700px;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
