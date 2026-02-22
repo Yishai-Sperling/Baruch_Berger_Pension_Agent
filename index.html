@@ -6,9 +6,14 @@
     <title>ברוך ברגר | ייעוץ פנסיוני מקצועי</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
         :root {
-            --navy: #1a2a44; /* כחול עמוק ואלגנטי */
-            --gold: #c5a059; /* זהב מעודן, לא צעקני */
+            --navy: #1a2a44;
+            --gold: #c5a059;
             --gold-hover: #b38f4d;
             --bg: #ffffff;
             --light-bg: #f8f9fa;
@@ -17,6 +22,26 @@
             --whatsapp: #25d366;
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.5s; }
+
         body {
             font-family: 'Assistant', sans-serif;
             margin: 0;
@@ -24,14 +49,14 @@
             color: var(--text-dark);
             background-color: var(--bg);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Header */
         header {
             padding: 25px 20px;
             text-align: center;
             background: #fff;
-            border-bottom: 3px solid var(--gold); /* פס זהב דק למעלה */
+            border-bottom: 3px solid var(--gold);
         }
 
         .logo {
@@ -39,9 +64,9 @@
             height: auto;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
-            padding: 100px 20px;
+            padding: 120px 20px;
             text-align: center;
             background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
             color: #fff;
@@ -51,35 +76,34 @@
             font-size: 3.2rem;
             margin-bottom: 20px;
             font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #d1d9e6;
-            max-width: 700px;
-            margin: 0 auto 40px;
         }
 
         .btn-gold {
             background: var(--gold);
             color: #fff;
-            padding: 16px 40px;
+            padding: 18px 45px;
             text-decoration: none;
             border-radius: 4px;
             font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
             display: inline-block;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
         .btn-gold:hover {
             background: var(--gold-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
         }
 
-        /* About Section */
+        .btn-gold:active {
+            transform: scale(0.95);
+        }
+
+        /* About */
         .about-section {
             padding: 100px 20px;
             max-width: 1100px;
@@ -97,7 +121,7 @@
             height: 450px;
             object-fit: cover;
             border-radius: 4px;
-            border-right: 15px solid var(--gold); /* מסגרת זהב בצד התמונה */
+            border-right: 15px solid var(--gold);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
@@ -105,19 +129,20 @@
             font-size: 2.5rem;
             color: var(--navy);
             margin-bottom: 20px;
-            position: relative;
+            position: relative; /* בשביל המיקום של הקו */
         }
 
+        /* הקו המוזהב שחזר */
         .about-text h2::after {
             content: '';
             display: block;
             width: 60px;
             height: 4px;
             background: var(--gold);
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
-        /* Gallery Grid */
+        /* Gallery */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -131,35 +156,23 @@
             object-fit: cover;
             object-position: center;
             border-radius: 4px;
-            transition: all 0.4s ease;
-            filter: grayscale(20%);
+            transition: all 0.5s ease;
         }
 
-        /* התיקון הספציפי לתמונה השלישית */
-        .gallery-item:last-child img {
-            object-position: top center;
-        }
+        .gallery-item:last-child img { object-position: top center; }
 
         .gallery-item img:hover {
-            filter: grayscale(0%);
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: scale(1.05);
         }
 
-        /* Calendly Section */
+        /* Booking */
         .booking-section {
             padding: 80px 20px;
             background-color: var(--light-bg);
             text-align: center;
         }
 
-        .booking-section h2 {
-            color: var(--navy);
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-        }
-
-        /* WhatsApp Button */
+        /* WhatsApp */
         .whatsapp-float {
             position: fixed;
             width: 65px;
@@ -177,29 +190,22 @@
             transition: all 0.3s ease;
         }
 
-        .whatsapp-float:hover { transform: scale(1.15); }
+        .whatsapp-float:hover { transform: scale(1.1); }
 
         footer {
             padding: 60px 20px;
             text-align: center;
             background: var(--navy);
             color: #fff;
-            font-size: 0.9rem;
         }
 
-        footer p { opacity: 0.7; }
-
-        /* Mobile Adjustments */
         @media (max-width: 900px) {
             .about-container { flex-direction: column; text-align: center; }
-            .about-text h2::after { margin: 10px auto; }
+            .about-text h2::after { margin: 15px auto 0; } /* ממרכז את הקו בטלפון */
             .gallery-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.5rem; }
             .about-image img { width: 100%; border-right: none; border-bottom: 10px solid var(--gold); }
-            
-            .gallery-item:last-child img {
-                object-position: top center !important;
-            }
+            .gallery-item:last-child img { object-position: top center !important; }
         }
     </style>
 </head>
@@ -210,24 +216,26 @@
     </header>
 
     <section class="hero">
-        <h1>העתיד הפנסיוני שלך בידיים טובות</h1>
-        <p>מומחיות בייעוץ פנסיוני, אסטרטגיית פרישה וניהול סיכונים. תכנון חכם שמתחיל עוד היום.</p>
-        <a href="#booking" class="btn-gold">לקביעת פגישה אישית</a>
+        <div class="fade-in">
+            <h1>העתיד הפנסיוני שלך בידיים טובות</h1>
+            <p>מומחיות בייעוץ פנסיוני, אסטרטגיית פרישה וניהול סיכונים.</p>
+            <a href="#booking" class="btn-gold">לקביעת פגישה אישית</a>
+        </div>
     </section>
 
     <section class="about-section">
         <div class="about-container">
-            <div class="about-image">
+            <div class="about-image fade-in delay-1">
                 <img src="baruch-profile.jpg" alt="ברוך ברגר">
             </div>
-            <div class="about-text">
+            <div class="about-text fade-in delay-2">
                 <h2>נעים מאוד, ברוך ברגר</h2>
-                <p>כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. העבודה שלי היא לוודא שהכסף שאתם חוסכים היום יעבוד בשבילכם בצורה המיטבית בעתיד.</p>
-                <p>אני מאמין ששילוב של מקצועיות פיננסית עם שקיפות מלאה הוא המפתח לשקט הנפשי שלך. אני כאן כדי להפוך את המורכבות הפנסיונית לתוכנית פעולה ברורה.</p>
+                <p>כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. אני כאן כדי להפוך את המורכבות הפנסיונית לתוכנית פעולה ברורה.</p>
+                <p>השילוב בין ניסיון מקצועי לבין ליווי אישי מאפשר ללקוחותיי לבנות ביטחון כלכלי אמיתי לאורך זמן.</p>
             </div>
         </div>
 
-        <div class="gallery-grid">
+        <div class="gallery-grid fade-in delay-2">
             <div class="gallery-item"><img src="baruch-1.jpg" alt="ברוך בעבודה"></div>
             <div class="gallery-item"><img src="baruch-2.jpg" alt="פגישת ייעוץ"></div>
             <div class="gallery-item"><img src="baruch-3.jpg" alt="ברוך ברגר משרד"></div>
@@ -235,20 +243,14 @@
     </section>
 
     <section id="booking" class="booking-section">
-        <h2>קביעת פגישת ייעוץ ביומן</h2>
-        <div class="calendly-inline-widget" data-url="https://calendly.com/barouch44/30min" style="min-width:320px;height:700px;"></div>
-        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <div class="fade-in">
+            <h2 style="font-size: 2.2rem; color: var(--navy); margin-bottom: 40px;">קביעת פגישת ייעוץ ביומן</h2>
+            <div class="calendly-inline-widget" data-url="https://calendly.com/barouch44/30min" style="min-width:320px;height:700px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
     </section>
 
     <a href="https://wa.me/972523227785" class="whatsapp-float" target="_blank">
         <svg width="35" height="35" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
-    </a>
-
-    <footer>
-        <p>© 2026 ברוך ברגר - ייעוץ פנסיוני. כל הזכויות שמורות.</p>
-    </footer>
-
-</body>
-</html>
