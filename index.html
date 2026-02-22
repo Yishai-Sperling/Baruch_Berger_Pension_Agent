@@ -6,7 +6,6 @@
     <title>ברוך ברגר | ייעוץ פנסיוני וביטוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* הגדרת מרחק גלילה אחיד */
         html { 
             scroll-behavior: smooth; 
             scroll-padding-top: 10px; 
@@ -30,7 +29,7 @@
             line-height: 1.6;
         }
 
-        /* Header דק ואלגנטי - שורה אחת תמיד */
+        /* Header */
         nav {
             position: sticky;
             top: 0;
@@ -44,49 +43,41 @@
             height: 70px; 
         }
 
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .nav-logo img {
-            height: 50px; 
-            width: auto;
-        }
+        .nav-logo img { height: 50px; width: auto; }
 
         .nav-links {
             display: flex;
             gap: 20px;
             list-style: none;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--navy);
             font-weight: 600;
-            font-size: 1rem;
             transition: color 0.3s;
-            white-space: nowrap; /* מונע מהטקסט לרדת שורה */
+            white-space: nowrap;
         }
-
         .nav-links a:hover { color: var(--gold); }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
 
         /* Hero */
         .hero {
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
             background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
             color: #fff;
+        }
+
+        .hero h1 { font-size: 2.8rem; margin-bottom: 10px; }
+        
+        .slogan-main {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: block;
+            letter-spacing: 1px;
         }
 
         .btn-gold {
@@ -98,42 +89,66 @@
             font-weight: 700;
             transition: all 0.2s;
             display: inline-block;
-            margin-top: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
+        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
 
-        /* Section Styling */
+        /* פס מספרים */
+        .stats-bar {
+            background: var(--light-bg);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .stat-item h3 { font-size: 2.5rem; color: var(--gold); margin: 0; }
+        .stat-item p { margin: 5px 0 0; font-weight: 600; color: var(--navy); }
+
+        /* Sections */
         section { 
-            padding: 60px 20px; 
+            padding: 70px 20px; 
             max-width: 1100px; 
             margin: 0 auto;
-            scroll-margin-top: 10px;
+            scroll-margin-top: 10px; 
         }
 
         .content-flex { display: flex; align-items: center; gap: 40px; }
         .content-flex.reverse { flex-direction: row-reverse; }
-        
         .section-image img {
             width: 400px; height: 350px;
             object-fit: cover; border-radius: 4px;
             box-shadow: 12px 12px 0 var(--gold);
         }
-
-        .first-image img { object-position: top center !important; }
-
         .section-text h2 { font-size: 2.1rem; color: var(--navy); margin-bottom: 15px; }
         .section-text h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin-top: 10px; }
 
+        /* FAQ */
+        .faq-container { max-width: 800px; margin: 40px auto 0; text-align: right; }
+        details { background: var(--light-bg); margin-bottom: 10px; padding: 15px; border-radius: 5px; cursor: pointer; }
+        summary { font-weight: 700; color: var(--navy); list-style: none; outline: none; }
+        summary::before { content: '+'; margin-left: 10px; color: var(--gold); font-size: 1.2rem; }
+        .faq-content { padding: 15px; background: #fff; margin-top: 5px; border-radius: 5px; border-top: 1px solid #eee; color: #555; }
+
+        /* Testimonials */
+        .testimonials { background: #fdfdfd; text-align: center; max-width: 100%; }
+        .testimonial-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+        .testimonial-card {
+            background: #fff; padding: 30px; border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 300px;
+            border-top: 4px solid var(--gold);
+        }
+
+        /* Utilities */
         .check-list { list-style: none; padding: 0; margin: 20px 0; }
         .check-list li { position: relative; padding-right: 30px; margin-bottom: 10px; font-weight: 500; }
         .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; }
-
+        
         .highlight-box {
             background: var(--light-bg); padding: 20px; border-right: 6px solid var(--gold);
             margin-top: 20px; font-style: italic; border-radius: 0 4px 4px 0;
         }
-
-        #booking { background: var(--light-bg); max-width: 100%; text-align: center; }
 
         .whatsapp-float {
             position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px;
@@ -144,25 +159,14 @@
 
         footer { background: var(--navy); color: #fff; padding: 30px; text-align: center; }
 
-        /* התאמה לנייד - שומר על שורה אחת */
         @media (max-width: 768px) {
-            nav {
-                padding: 0 15px;
-                height: 70px; /* גובה זהה למחשב כדי שהגלילה תהיה מדויקת */
-            }
-            .nav-logo img {
-                height: 40px; /* לוגו מעט קטן יותר כדי לפנות מקום */
-            }
-            .nav-links {
-                gap: 10px; /* צמצום רווחים בין הקישורים */
-            }
-            .nav-links a {
-                font-size: 0.85rem; /* טקסט קטן יותר כדי שייכנס בשורה אחת */
-            }
+            .hero h1 { font-size: 2rem; }
+            .stats-bar { flex-direction: column; gap: 30px; }
+            .nav-links { gap: 10px; font-size: 0.85rem; }
             .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; }
             .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
             .section-text h2::after { margin: 10px auto; }
-            .check-list li { text-align: right; }
+            .testimonial-card { width: 100%; }
         }
     </style>
 </head>
@@ -174,16 +178,35 @@
         </div>
         <ul class="nav-links">
             <li><a href="#about">אודות</a></li>
-            <li><a href="#coverage">ביטוחי בריאות</a></li> <li><a href="#details">הפגישה</a></li> <li><a href="#booking">קביעת פגישה</a></li> </ul>
+            <li><a href="#coverage">ביטוח</a></li>
+            <li><a href="#details">הפגישה</a></li>
+            <li><a href="#booking">קביעת פגישה</a></li>
+        </ul>
     </nav>
 
     <section class="hero">
         <div class="fade-in">
             <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
-            <p>תכנון פיננסי מקצועי עם דגש על משפחה, עתיד ושקט נפשי.</p>
+            <span class="slogan-main">"תהיה יותר טוב מהתירוצים שלך"</span>
+            <p style="margin-bottom: 30px; opacity: 0.9;">תכנון פיננסי מקצועי עם דגש על משפחה, עתיד ושקט נפשי.</p>
             <a href="#booking" class="btn-gold">קביעת פגישה אישית</a>
         </div>
     </section>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <h3>10+</h3>
+            <p>שנות ניסיון</p>
+        </div>
+        <div class="stat-item">
+            <h3>500+</h3>
+            <p>משפחות מלוות</p>
+        </div>
+        <div class="stat-item">
+            <h3>15%</h3>
+            <p>חיסכון ממוצע בעלויות</p>
+        </div>
+    </div>
 
     <section id="about" class="fade-in">
         <div class="content-flex">
@@ -204,7 +227,7 @@
             </div>
             <div class="section-text">
                 <h2>ביטוחי בריאות וחיים</h2>
-                <p>אני מציע הקמת ביטוחי בריאות חדשים בהתאמה אישית מלאה. הדגש הוא על בחירת כיסויים מדויקת ונכונה בהתאם לשלב בחיים, תוך מניעת כפילויות והבטחת המענה הרפואי הטוב ביותר ברגע האמת.</p>
+                <p>הקמת ביטוחי בריאות חדשים בהתאמה אישית מלאה. הדגש הוא על בחירת כיסויים מדויקת, מניעת כפילויות והבטחת המענה הרפואי הטוב ביותר ברגע האמת.</p>
             </div>
         </div>
     </section>
@@ -230,11 +253,48 @@
         </div>
     </section>
 
-    <section id="booking">
-        <div class="fade-in">
-            <h2>קביעת פגישת ייעוץ</h2>
+    <section class="testimonials">
+        <h2>מה לקוחות אומרים</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"ברוך עשה לנו סדר בבלגן הפנסיוני. פתאום הכל ברור וחסכנו מאות שקלים כל חודש."</p>
+                <h4>- משפחת כהן, רעננה</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"הליווי המקצועי והסבלנות של ברוך נתנו לנו שקט נפשי שלא היה לנו שנים."</p>
+                <h4>- אבי לוי, תל אביב</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <h2 style="text-align: center;">שאלות ותשובות</h2>
+        <div class="faq-container">
+            <details>
+                <summary>האם הפגישה הראשונה כרוכה בתשלום?</summary>
+                <div class="faq-content">לא, פגישת ההיכרות והייעוץ הראשונית מתקיימת ללא עלות וללא התחייבות.</div>
+            </details>
+            <details>
+                <summary>מה עליי להביא לפגישה?</summary>
+                <div class="faq-content">מומלץ להצטייד בדו"חות פנסיוניים אחרונים או פשוט לאשר לנו גישה למסלקה הפנסיונית - אנחנו נדאג להכל.</div>
+            </details>
+            <details>
+                <summary>איך בודקים אם יש לי כפל ביטוחים?</summary>
+                <div class="faq-content">אנחנו מבצעים סריקה מקיפה דרך "הר הביטוח" ומצליבים נתונים מול הפוליסות הקיימות שלך בזמן אמת.</div>
+            </details>
+            <details>
+                <summary>באילו חברות ביטוח ברוך עובד?</summary>
+                <div class="faq-content">ברוך עובד מול כל חברות הביטוח ובתי ההשקעות המובילים בישראל, מה שמאפשר לו אובייקטיביות מלאה והתאמה של המסלול הטוב ביותר עבורכם.</div>
+            </details>
+        </div>
+    </section>
+
+    <section id="booking" style="background: var(--light-bg); max-width: 100%;">
+        <div class="fade-in" style="max-width: 1100px; margin: 0 auto; text-align: center;">
+            <p style="color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 1.2rem;">תהיה יותר טוב מהתירוצים שלך.</p>
+            <h2 style="margin-top: 0;">קביעת פגישת ייעוץ</h2>
             <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">
-                הפגישה מתקיימת <strong>ללא עלות וללא התחייבות</strong>. ניתן לקבוע מועד ישירות בלוח השנה.
+                הפגישה מתקיימת <strong>ללא עלות וללא התחייבות</strong>.
             </p>
             <div class="calendly-inline-widget" data-url="https://calendly.com/barouch44/30min" style="min-width:320px;height:700px;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
