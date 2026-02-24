@@ -6,213 +6,127 @@
     <title>ברוך ברגר | ייעוץ פנסיוני וביטוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        html { 
-            scroll-behavior: smooth; 
-            scroll-padding-top: 10px; 
-        }
-        
+        html { scroll-behavior: smooth; }
         :root {
-            --navy: #1a2a44;
-            --gold: #c5a059;
-            --gold-hover: #b38f4d;
-            --bg: #ffffff;
-            --light-bg: #f8f9fa;
-            --text-dark: #1a2a44;
-            --whatsapp: #25d366;
+            --navy: #1a2a44; --gold: #c5a059; --gold-hover: #b38f4d;
+            --bg: #ffffff; --light-bg: #f8f9fa; --text-dark: #1a2a44; --whatsapp: #25d366;
         }
+        body { font-family: 'Assistant', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: var(--bg); line-height: 1.6; }
 
-        body {
-            font-family: 'Assistant', sans-serif;
-            margin: 0; padding: 0;
-            color: var(--text-dark);
-            background-color: var(--bg);
-            line-height: 1.6;
-        }
-
-        /* Header */
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.98);
-            padding: 0 20px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px; 
-        }
-
+        /* Navigation */
+        nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.98); padding: 0 40px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); z-index: 1000; display: flex; justify-content: space-between; align-items: center; height: 75px; flex-direction: row-reverse; }
         .nav-logo img { height: 50px; width: auto; }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0; padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--navy);
-            font-weight: 600;
-            transition: color 0.3s;
-            white-space: nowrap;
-        }
+        .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 600; transition: color 0.3s; font-size: 1.1rem; }
         .nav-links a:hover { color: var(--gold); }
 
-        /* Hero */
-        .hero {
-            padding: 100px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
-            color: #fff;
-        }
-
-        .hero h1 { font-size: 2.8rem; margin-bottom: 10px; }
+        /* Titles with Gold Divider */
+        h2 { position: relative; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2rem; color: var(--navy); }
+        h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 3px; background-color: var(--gold); }
         
-        .slogan-main {
-            font-size: 1.4rem;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 25px;
-            display: block;
-            letter-spacing: 1px;
+        /* Centered Titles & Dividers */
+        .testimonials h2, #referral h2, #faq h2, #booking h2 { text-align: center; }
+        .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after {
+            right: 50%;
+            transform: translateX(50%);
         }
 
-        .btn-gold {
-            background: var(--gold);
-            color: #fff;
-            padding: 14px 35px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 700;
-            transition: all 0.2s;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
-
-        /* פס מספרים */
-        .stats-bar {
-            background: var(--light-bg);
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
-        .stat-item h3 { font-size: 2.5rem; color: var(--gold); margin: 0; }
-        .stat-item p { margin: 5px 0 0; font-weight: 600; color: var(--navy); }
-
-        /* Sections */
-        section { 
-            padding: 70px 20px; 
-            max-width: 1100px; 
-            margin: 0 auto;
-            scroll-margin-top: 10px; 
-        }
-
-        .content-flex { display: flex; align-items: center; gap: 40px; }
+        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 0px; }
+        
+        .hero { padding: 140px 20px; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%); color: #fff; max-width: 100%; }
+        .slogan-main { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 25px; display: block; }
+        
+        .content-flex { display: flex; align-items: center; gap: 60px; }
         .content-flex.reverse { flex-direction: row-reverse; }
-        .section-image img {
-            width: 400px; height: 350px;
-            object-fit: cover; border-radius: 4px;
-            box-shadow: 12px 12px 0 var(--gold);
+        .section-image img { width: 420px; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 15px 15px 0 var(--gold); }
+
+        /* Stats */
+        .stats-bar { background: var(--light-bg); padding: 60px 20px; display: flex; justify-content: center; gap: 80px; text-align: center; border-bottom: 1px solid #eee; }
+        .stat-item h3 { font-size: 2.8rem; color: var(--gold); margin: 0; font-weight: 700; }
+
+        .check-list { list-style: none; padding: 0; margin: 30px 0; }
+        .check-list li { position: relative; padding-right: 35px; margin-bottom: 15px; font-weight: 500; font-size: 1.1rem; }
+        .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
+
+        /* Carousel & Centered Testimonial Cards */
+        .testimonials-container { position: relative; max-width: 1050px; margin: 50px auto; overflow: hidden; padding: 15px; }
+        .testimonial-slider { display: flex; transition: transform 0.6s ease-in-out; gap: 20px; }
+        .testimonial-card { 
+            flex: 0 0 calc(33.333% - 14px);
+            background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); 
+            border-top: 4px solid var(--gold); box-sizing: border-box; min-height: 220px; 
+            display: flex; flex-direction: column; justify-content: center;
+            text-align: center; /* מרכוז הטקסט בתוך הכרטיסייה */
         }
-        .section-text h2 { font-size: 2.1rem; color: var(--navy); margin-bottom: 15px; }
-        .section-text h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin-top: 10px; }
+        .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
+
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--navy); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; opacity: 0.8; }
+        .slider-btn:hover { background: var(--gold); opacity: 1; }
+        .prev-btn { left: 0; }
+        .next-btn { right: 0; }
+
+        /* Form Containers */
+        .form-container-card, .referral-box {
+            padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box;
+        }
+        .form-container-card { background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); }
+        .referral-box { background: var(--navy); color: white; }
+        .referral-box h2, .referral-box p { color: #ffffff !important; }
+
+        form { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        input, textarea { width: 100%; max-width: 500px; padding: 14px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem; text-align: center; }
+        .btn-gold { background: var(--gold); color: #fff; padding: 16px 40px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; width: 100%; max-width: 500px; font-size: 1.1rem; }
+        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
 
         /* FAQ */
-        .faq-container { max-width: 800px; margin: 40px auto 0; text-align: right; }
-        details { background: var(--light-bg); margin-bottom: 10px; padding: 15px; border-radius: 5px; cursor: pointer; }
-        summary { font-weight: 700; color: var(--navy); list-style: none; outline: none; }
-        summary::before { content: '+'; margin-left: 10px; color: var(--gold); font-size: 1.2rem; }
-        .faq-content { padding: 15px; background: #fff; margin-top: 5px; border-radius: 5px; border-top: 1px solid #eee; color: #555; }
+        .faq-container { max-width: 850px; margin: 50px auto 0; text-align: right; }
+        details { background: var(--light-bg); margin-bottom: 15px; padding: 20px; border-radius: 8px; cursor: pointer; }
+        summary { font-weight: 700; color: var(--navy); list-style: none; font-size: 1.1rem; }
+        summary::before { content: '+ '; color: var(--gold); margin-left: 10px; }
+        .faq-content { padding-top: 15px; color: #444; border-top: 1px solid #eee; margin-top: 10px; }
 
-        /* Testimonials */
-        .testimonials { background: #fdfdfd; text-align: center; max-width: 100%; }
-        .testimonial-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
-        .testimonial-card {
-            background: #fff; padding: 30px; border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 300px;
-            border-top: 4px solid var(--gold);
-        }
-
-        /* Utilities */
-        .check-list { list-style: none; padding: 0; margin: 20px 0; }
-        .check-list li { position: relative; padding-right: 30px; margin-bottom: 10px; font-weight: 500; }
-        .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; }
-        
-        .highlight-box {
-            background: var(--light-bg); padding: 20px; border-right: 6px solid var(--gold);
-            margin-top: 20px; font-style: italic; border-radius: 0 4px 4px 0;
-        }
-
-        .whatsapp-float {
-            position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px;
-            background: var(--whatsapp); color: #fff; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000;
-        }
-
-        footer { background: var(--navy); color: #fff; padding: 30px; text-align: center; }
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
+        footer { background: var(--navy); color: #fff; padding: 50px; text-align: center; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .stats-bar { flex-direction: column; gap: 30px; }
-            .nav-links { gap: 10px; font-size: 0.85rem; }
+            nav { padding: 0 20px; }
             .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; }
             .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
-            .section-text h2::after { margin: 10px auto; }
-            .testimonial-card { width: 100%; }
+            .stats-bar { flex-direction: column; gap: 40px; }
+            .nav-links { display: none; }
+            h2::after { right: 50% !important; transform: translateX(50%) !important; }
+            .testimonial-card { flex: 0 0 100%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-logo">
-            <img src="logo.png" alt="ברוך ברגר">
-        </div>
+        <div class="nav-logo"><img src="logo.png" alt="ברוך ברגר"></div>
         <ul class="nav-links">
             <li><a href="#about">אודות</a></li>
-            <li><a href="#coverage">ביטוח</a></li>
             <li><a href="#details">הפגישה</a></li>
-            <li><a href="#booking">קביעת פגישה</a></li>
+            <li><a href="#testimonials">המלצות</a></li>
+            <li><a href="#faq">שאלות</a></li>
+            <li><a href="#booking">קביעה</a></li>
         </ul>
     </nav>
 
     <section class="hero">
-        <div class="fade-in">
-            <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
-            <span class="slogan-main">"תהיה יותר טוב מהתירוצים שלך"</span>
-            <p style="margin-bottom: 30px; opacity: 0.9;">תכנון פיננסי מקצועי עם דגש על משפחה, עתיד ושקט נפשי.</p>
-            <a href="#booking" class="btn-gold">קביעת פגישה אישית</a>
-        </div>
+        <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
+        <span class="slogan-main">"תהיה יותר טוב מהתירוצים שלך"</span>
+        <a href="#booking" class="btn-gold" style="width: auto;">קביעת פגישה אישית</a>
     </section>
 
     <div class="stats-bar">
-        <div class="stat-item">
-            <h3>10+</h3>
-            <p>שנות ניסיון</p>
-        </div>
-        <div class="stat-item">
-            <h3>500+</h3>
-            <p>משפחות מלוות</p>
-        </div>
-        <div class="stat-item">
-            <h3>15%</h3>
-            <p>חיסכון ממוצע בעלויות</p>
-        </div>
+        <div class="stat-item"><h3>10+</h3><p>שנות ניסיון</p></div>
+        <div class="stat-item"><h3>500+</h3><p>משפחות מלוות</p></div>
+        <div class="stat-item"><h3>15%</h3><p>חיסכון ממוצע</p></div>
     </div>
 
-    <section id="about" class="fade-in">
+    <section id="about">
         <div class="content-flex">
-            <div class="section-image first-image">
-                <img src="baruch-profile.jpg" alt="ברוך ברגר">
-            </div>
+            <div class="section-image"><img src="baruch-profile.jpg" alt="ברוך ברגר"></div>
             <div class="section-text">
                 <h2>נעים מאוד, ברוך ברגר</h2>
                 <p>כיועץ וסוכן פנסיוני, אני מלווה משפחות ויחידים בנקודות הצומת החשובות ביותר של חייהם הכלכליים. הליווי שלי מבוסס על הבנה עמוקה של הצרכים האישיים שלכם ובניית שקט נפשי לטווח ארוך.</p>
@@ -220,82 +134,70 @@
         </div>
     </section>
 
-    <section id="coverage" style="background: #fdfdfd;">
-        <div class="content-flex reverse fade-in">
-            <div class="section-image">
-                <img src="baruch-1.jpg" alt="ביטוחי בריאות">
-            </div>
-            <div class="section-text">
-                <h2>ביטוחי בריאות וחיים</h2>
-                <p>הקמת ביטוחי בריאות חדשים בהתאמה אישית מלאה. הדגש הוא על בחירת כיסויים מדויקת, מניעת כפילויות והבטחת המענה הרפואי הטוב ביותר ברגע האמת.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="details">
-        <div class="content-flex fade-in">
-            <div class="section-image">
-                <img src="baruch-2.jpg" alt="פגישת ייעוץ">
-            </div>
-            <div class="section-text">
-                <h2>מה כוללת הפגישה?</h2>
-                <ul class="check-list">
-                    <li>בחינת קרנות פנסיה, קופות גמל וביטוחי מנהלים.</li>
-                    <li>ניתוח דמי ניהול והשפעתם המצטברת.</li>
-                    <li>התאמת מסלולי השקעה לרמת הסיכון.</li>
-                    <li>איתור כפל ביטוחים והוצאות מיותרות.</li>
-                    <li>בחינת מבנה ביטוחי החיים הקיימים.</li>
-                </ul>
-                <div class="highlight-box">
-                    הפגישה חוסכת "כאבי ראש" עתידיים ומבטיחה שהכסף שלכם מנוהל בצורה החכמה והבטוחה ביותר.
+    <section id="details" style="background: #fdfdfd; max-width: 100%;">
+        <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+            <div class="content-flex reverse">
+                <div class="section-image"><img src="baruch-2.jpg" alt="מה כוללת הפגישה"></div>
+                <div class="section-text">
+                    <h2>מה כוללת הפגישה?</h2>
+                    <ul class="check-list">
+                        <li>בחינת קרנות פנסיה, קופות גמל וביטוחי מנהלים.</li>
+                        <li>ניתוח דמי ניהול והשפעתם המצטברת.</li>
+                        <li>התאמת מסלולי השקעה לרמת הסיכון.</li>
+                        <li>איתור כפל ביטוחים והוצאות מיותרות.</li>
+                        <li>בחינת מבנה ביטוחי החיים הקיימים.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
+    <section id="testimonials" class="testimonials">
         <h2>מה לקוחות אומרים</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <p>"ברוך עשה לנו סדר בבלגן הפנסיוני. פתאום הכל ברור וחסכנו מאות שקלים כל חודש."</p>
-                <h4>- משפחת כהן, רעננה</h4>
-            </div>
-            <div class="testimonial-card">
-                <p>"הליווי המקצועי והסבלנות של ברוך נתנו לנו שקט נפשי שלא היה לנו שנים."</p>
-                <h4>- אבי לוי, תל אביב</h4>
-            </div>
+        <div class="testimonials-container">
+            <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10094;</button>
+            <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10095;</button>
+            <div class="testimonial-slider" id="testimonialGrid"><p>טוען המלצות...</p></div>
+        </div>
+        
+        <div class="form-container-card">
+            <h3>הוספת המלצה</h3>
+            <form id="testimonialForm">
+                <input type="text" id="testName" placeholder="השם שלך" required>
+                <textarea id="testText" rows="3" placeholder="איך הייתה החוויה שלך?" required></textarea>
+                <button type="submit" class="btn-gold" id="testBtn">שלח המלצה לאישור</button>
+            </form>
+            <div id="testMsg" style="display:none; color: green; margin-top: 15px; font-weight: bold;">תודה! ההמלצה הועברה לאישור.</div>
+        </div>
+    </section>
+
+    <section id="referral">
+        <div class="referral-box">
+            <h2>עזרתם לחבר? הרווחתם</h2>
+            <p>מכירים מישהו שצריך סדר בביטוחים? הכניסו פרטים ונחזור אליו.</p>
+            <form id="referralForm">
+                <input type="text" id="refName" placeholder="שם החבר" required>
+                <input type="tel" id="refPhone" placeholder="טלפון החבר" required>
+                <button type="submit" class="btn-gold" id="refBtn">שלח פרטים לברוך</button>
+            </form>
+            <div id="refMsg" style="display:none; color: var(--gold); margin-top: 15px; font-weight: bold;">הפרטים נשלחו בהצלחה!</div>
         </div>
     </section>
 
     <section id="faq">
         <h2 style="text-align: center;">שאלות ותשובות</h2>
         <div class="faq-container">
-            <details>
-                <summary>האם הפגישה הראשונה כרוכה בתשלום?</summary>
-                <div class="faq-content">לא, פגישת ההיכרות והייעוץ הראשונית מתקיימת ללא עלות וללא התחייבות.</div>
-            </details>
-            <details>
-                <summary>מה עליי להביא לפגישה?</summary>
-                <div class="faq-content">מומלץ להצטייד בדו"חות פנסיוניים אחרונים או פשוט לאשר לנו גישה למסלקה הפנסיונית - אנחנו נדאג להכל.</div>
-            </details>
-            <details>
-                <summary>איך בודקים אם יש לי כפל ביטוחים?</summary>
-                <div class="faq-content">אנחנו מבצעים סריקה מקיפה דרך "הר הביטוח" ומצליבים נתונים מול הפוליסות הקיימות שלך בזמן אמת.</div>
-            </details>
-            <details>
-                <summary>באילו חברות ביטוח ברוך עובד?</summary>
-                <div class="faq-content">ברוך עובד מול כל חברות הביטוח ובתי ההשקעות המובילים בישראל, מה שמאפשר לו אובייקטיביות מלאה והתאמה של המסלול הטוב ביותר עבורכם.</div>
-            </details>
+            <details><summary>האם הפגישה כרוכה בתשלום?</summary><div class="faq-content">לא, פגישת ההיכרות ללא עלות וללא התחייבות.</div></details>
+            <details><summary>מה עליי להביא לפגישה?</summary><div class="faq-content">דו"חות פנסיוניים אחרונים או אישור גישה למסלקה הפנסיונית.</div></details>
+            <details><summary>איך בודקים אם יש לי כפל ביטוחים?</summary><div class="faq-content">אנחנו מבצעים סריקה מקיפה דרך מערכות "הר הביטוח".</div></details>
+            <details><summary>באילו חברות ביטוח ברוך עובד?</summary><div class="faq-content">ברוך עובד מול כל החברות המובילות בישראל.</div></details>
         </div>
     </section>
 
-    <section id="booking" style="background: var(--light-bg); max-width: 100%;">
-        <div class="fade-in" style="max-width: 1100px; margin: 0 auto; text-align: center;">
-            <p style="color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 1.2rem;">תהיה יותר טוב מהתירוצים שלך.</p>
-            <h2 style="margin-top: 0;">קביעת פגישת ייעוץ</h2>
-            <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">
-                הפגישה מתקיימת <strong>ללא עלות וללא התחייבות</strong>.
-            </p>
+    <section id="booking">
+        <div style="text-align: center;">
+            <p style="color: var(--gold); font-weight: 700; margin-bottom: 10px;">תהיה יותר טוב מהתירוצים שלך.</p>
+            <h2>קביעת פגישה אישית</h2>
             <div class="calendly-inline-widget" data-url="https://calendly.com/barouch44/30min" style="min-width:320px;height:700px;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
         </div>
@@ -305,9 +207,68 @@
         <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
 
-    <footer>
-        <p>© 2026 ברוך ברגר - ייעוץ פנסיוני וביטוח.</p>
-    </footer>
+    <footer><p>© 2026 ברוך ברגר - ייעוץ פנסיוני וביטוח.</p></footer>
 
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1ENsBQbcA3qVk9KyZ5XzVhn8UjJ84w8ZMpYrON34Q1Xu1D2fIAgKFezLf8Ztfq4_MIQ/exec';
+        let currentSlide = 0;
+        let totalSlides = 0;
+        let autoSlideInterval;
+
+        function loadTestimonials() {
+            fetch(SCRIPT_URL).then(res => res.json()).then(data => {
+                const grid = document.getElementById('testimonialGrid');
+                grid.innerHTML = '';
+                if(!data || data.length === 0) {
+                    grid.innerHTML = '<div class="testimonial-card"><p>היו הראשונים להמליץ!</p></div>';
+                    return;
+                }
+                totalSlides = data.length;
+                data.forEach(t => {
+                    grid.innerHTML += `<div class="testimonial-card"><p>"${t.text}"</p><h4>- ${t.name}</h4></div>`;
+                });
+                startAutoSlide();
+            });
+        }
+
+        function moveSlide(direction) {
+            const grid = document.getElementById('testimonialGrid');
+            const cardWidth = document.querySelector('.testimonial-card').offsetWidth + 20;
+            const visibleCards = window.innerWidth > 900 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+            const maxSlide = Math.max(0, totalSlides - visibleCards);
+            currentSlide += direction;
+            if (currentSlide > maxSlide) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = maxSlide;
+            grid.style.transform = `translateX(${currentSlide * cardWidth}px)`;
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                const visibleCards = window.innerWidth > 900 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+                if (totalSlides > visibleCards) moveSlide(1);
+            }, 5000);
+        }
+
+        function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
+
+        document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('testBtn');
+            btn.disabled = true; btn.innerText = 'שולח...';
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ type: 'testimonial', name: document.getElementById('testName').value, text: document.getElementById('testText').value })})
+            .then(() => { document.getElementById('testimonialForm').reset(); document.getElementById('testMsg').style.display = 'block'; btn.innerText = 'נשלח!'; });
+        });
+
+        document.getElementById('referralForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('refBtn');
+            btn.disabled = true; btn.innerText = 'שולח...';
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ type: 'referral', name: document.getElementById('refName').value, phone: document.getElementById('refPhone').value })})
+            .then(() => { document.getElementById('referralForm').reset(); document.getElementById('refMsg').style.display = 'block'; btn.innerText = 'הפרטים הועברו'; });
+        });
+
+        loadTestimonials();
+    </script>
 </body>
 </html>
