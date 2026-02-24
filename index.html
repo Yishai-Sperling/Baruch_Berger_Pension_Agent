@@ -11,7 +11,11 @@
             --navy: #1a2a44; --gold: #c5a059; --gold-hover: #b38f4d;
             --bg: #ffffff; --light-bg: #f8f9fa; --text-dark: #1a2a44; --whatsapp: #25d366;
         }
-        body { font-family: 'Assistant', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: var(--bg); line-height: 1.6; }
+        body { font-family: 'Assistant', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- Animations --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* Navigation */
         nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.98); padding: 0 40px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); z-index: 1000; display: flex; justify-content: space-between; align-items: center; height: 75px; flex-direction: row-reverse; }
@@ -28,10 +32,7 @@
         h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 3px; background-color: var(--gold); }
         
         .testimonials h2, #referral h2, #faq h2, #booking h2 { text-align: center; }
-        .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after {
-            right: 50%;
-            transform: translateX(50%);
-        }
+        .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after { right: 50%; transform: translateX(50%); }
 
         section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 5px; }
         
@@ -50,7 +51,7 @@
         .check-list li { position: relative; padding-right: 35px; margin-bottom: 15px; font-weight: 500; font-size: 1.1rem; }
         .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
 
-        /* Carousel */
+        /* Carousel - המבנה המקורי שאהבת */
         .testimonials-container { position: relative; max-width: 1050px; margin: 50px auto; overflow: hidden; padding: 15px; }
         .testimonial-slider { display: flex; transition: transform 0.6s ease-in-out; gap: 20px; }
         .testimonial-card { 
@@ -60,13 +61,12 @@
             display: flex; flex-direction: column; justify-content: center; text-align: center;
         }
         .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
-
         .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--navy); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; opacity: 0.8; }
         .slider-btn:hover { background: var(--gold); opacity: 1; }
         .prev-btn { left: 0; }
         .next-btn { right: 0; }
 
-        /* Form Containers */
+        /* Form Containers & Referral Box - חזרה למקור */
         .form-container-card, .referral-box { padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box; }
         .form-container-card { background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); }
         .referral-box { background: var(--navy); color: white; }
@@ -77,7 +77,7 @@
         .btn-gold { background: var(--gold); color: #fff; padding: 16px 40px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; width: 100%; max-width: 500px; font-size: 1.1rem; }
         .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
 
-        /* FAQ */
+        /* FAQ - חזרה למקור */
         .faq-container { max-width: 850px; margin: 50px auto 0; text-align: right; }
         details { background: var(--light-bg); margin-bottom: 15px; padding: 20px; border-radius: 8px; cursor: pointer; }
         summary { font-weight: 700; color: var(--navy); list-style: none; font-size: 1.1rem; }
@@ -89,32 +89,19 @@
 
         /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 768px) {
-            nav { padding: 0 20px; flex-direction: row; } /* לוגו ימין, המבורגר שמאל בנייד */
-            .menu-toggle { display: block; } /* הצגת כפתור המבורגר */
-
+            nav { padding: 0 20px; flex-direction: row; }
+            .menu-toggle { display: block; }
             .nav-links {
-                display: none; /* הסתרה רגילה */
-                position: absolute; top: 75px; left: 0; width: 100%; 
+                display: none; position: absolute; top: 75px; left: 0; width: 100%; 
                 background: #fff; flex-direction: column; text-align: center;
-                padding: 20px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-                gap: 20px;
+                padding: 20px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); gap: 20px;
             }
-            .nav-links.active { display: flex; } /* הצגה כשפעיל */
-
-            section { padding: 40px 20px; 
-                    scroll-margin-top: 50px;} /* רווחים קטנים יותר בין סקשנים */
-            .hero { padding: 80px 20px; }
-            h2 { font-size: 1.8rem; }
-
+            .nav-links.active { display: flex; }
+            section { padding: 40px 20px; scroll-margin-top: 50px; }
             .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; gap: 30px; }
             .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
-            
-            .stats-bar { flex-direction: column; gap: 30px; padding: 40px 20px; }
-            .stat-item h3 { font-size: 2.2rem; }
-
+            .stats-bar { flex-direction: column; gap: 30px; }
             .testimonial-card { flex: 0 0 100%; }
-            .form-container-card, .referral-box { padding: 30px 20px; }
-            
             h2::after { right: 50% !important; transform: translateX(50%) !important; }
         }
     </style>
@@ -133,19 +120,19 @@
         </ul>
     </nav>
 
-    <section class="hero">
+    <header class="hero">
         <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
         <span class="slogan-main">"תהיה יותר טוב מהתירוצים שלך"</span>
         <a href="#booking" class="btn-gold" style="width: auto; display: inline-block;">קביעת פגישה אישית</a>
-    </section>
+    </header>
 
-    <div class="stats-bar">
+    <div class="stats-bar reveal">
         <div class="stat-item"><h3>10+</h3><p>שנות ניסיון</p></div>
         <div class="stat-item"><h3>500+</h3><p>משפחות מלוות</p></div>
         <div class="stat-item"><h3>15%</h3><p>חיסכון ממוצע</p></div>
     </div>
 
-    <section id="about">
+    <section id="about" class="reveal">
         <div class="content-flex">
             <div class="section-image"><img src="baruch-profile.jpg" alt="ברוך ברגר"></div>
             <div class="section-text">
@@ -155,7 +142,7 @@
         </div>
     </section>
 
-    <section id="details" style="background: #fdfdfd; max-width: 100%;">
+    <section id="details" class="reveal" style="background: #fdfdfd; max-width: 100%;">
         <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
             <div class="content-flex reverse">
                 <div class="section-image"><img src="baruch-2.jpg" alt="מה כוללת הפגישה"></div>
@@ -173,7 +160,7 @@
         </div>
     </section>
 
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials reveal">
         <h2>מה לקוחות אומרים</h2>
         <div class="testimonials-container">
             <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10094;</button>
@@ -192,7 +179,7 @@
         </div>
     </section>
 
-    <section id="referral">
+    <section id="referral" class="reveal">
         <div class="referral-box">
             <h2>עזרתם לחבר? הרווחתם</h2>
             <p>מכירים מישהו שצריך סדר בביטוחים? הכניסו פרטים ונחזור אליו.</p>
@@ -205,7 +192,7 @@
         </div>
     </section>
 
-    <section id="faq">
+    <section id="faq" class="reveal">
         <h2>שאלות ותשובות</h2>
         <div class="faq-container">
             <details><summary>האם הפגישה כרוכה בתשלום?</summary><div class="faq-content">לא, פגישת ההיכרות ללא עלות וללא התחייבות.</div></details>
@@ -215,7 +202,7 @@
         </div>
     </section>
 
-    <section id="booking">
+    <section id="booking" class="reveal">
         <div style="text-align: center;">
             <p style="color: var(--gold); font-weight: 700; margin-bottom: 10px;">תהיה יותר טוב מהתירוצים שלך.</p>
             <h2>קביעת פגישה אישית</h2>
@@ -232,17 +219,31 @@
 
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1ENsBQbcA3qVk9KyZ5XzVhn8UjJ84w8ZMpYrON34Q1Xu1D2fIAgKFezLf8Ztfq4_MIQ/exec';
-        let currentSlide = 0;
-        let totalSlides = 0;
-        let autoSlideInterval;
+        
+        // Reveal Animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
 
-        // Mobile Menu Toggle Function
         function toggleMenu() {
             const nav = document.getElementById('navLinks');
             if (window.innerWidth <= 768) {
                 nav.classList.toggle('active');
             }
         }
+
+        let currentSlide = 0;
+        let totalSlides = 0;
+        let autoSlideInterval;
 
         function loadTestimonials() {
             fetch(SCRIPT_URL).then(res => res.json()).then(data => {
@@ -298,9 +299,7 @@
         });
 
         loadTestimonials();
+        reveal(); // Initial reveal check
     </script>
 </body>
 </html>
-
-
-
