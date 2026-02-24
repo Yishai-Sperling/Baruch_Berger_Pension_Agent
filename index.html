@@ -20,18 +20,20 @@
         .nav-links a { text-decoration: none; color: var(--navy); font-weight: 600; transition: color 0.3s; font-size: 1.1rem; }
         .nav-links a:hover { color: var(--gold); }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle { display: none; background: none; border: none; font-size: 2rem; color: var(--navy); cursor: pointer; }
+
         /* Titles with Gold Divider */
         h2 { position: relative; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2rem; color: var(--navy); }
         h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 3px; background-color: var(--gold); }
         
-        /* Centered Titles & Dividers */
         .testimonials h2, #referral h2, #faq h2, #booking h2 { text-align: center; }
         .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after {
             right: 50%;
             transform: translateX(50%);
         }
 
-        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 0px; }
+        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 5px; }
         
         .hero { padding: 140px 20px; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%); color: #fff; max-width: 100%; }
         .slogan-main { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 25px; display: block; }
@@ -48,15 +50,14 @@
         .check-list li { position: relative; padding-right: 35px; margin-bottom: 15px; font-weight: 500; font-size: 1.1rem; }
         .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
 
-        /* Carousel & Centered Testimonial Cards */
+        /* Carousel */
         .testimonials-container { position: relative; max-width: 1050px; margin: 50px auto; overflow: hidden; padding: 15px; }
         .testimonial-slider { display: flex; transition: transform 0.6s ease-in-out; gap: 20px; }
         .testimonial-card { 
             flex: 0 0 calc(33.333% - 14px);
             background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); 
             border-top: 4px solid var(--gold); box-sizing: border-box; min-height: 220px; 
-            display: flex; flex-direction: column; justify-content: center;
-            text-align: center; /* מרכוז הטקסט בתוך הכרטיסייה */
+            display: flex; flex-direction: column; justify-content: center; text-align: center;
         }
         .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
 
@@ -66,9 +67,7 @@
         .next-btn { right: 0; }
 
         /* Form Containers */
-        .form-container-card, .referral-box {
-            padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box;
-        }
+        .form-container-card, .referral-box { padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box; }
         .form-container-card { background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); }
         .referral-box { background: var(--navy); color: white; }
         .referral-box h2, .referral-box p { color: #ffffff !important; }
@@ -88,14 +87,34 @@
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
         footer { background: var(--navy); color: #fff; padding: 50px; text-align: center; }
 
+        /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 768px) {
-            nav { padding: 0 20px; }
-            .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; }
+            nav { padding: 0 20px; flex-direction: row; } /* לוגו ימין, המבורגר שמאל בנייד */
+            .menu-toggle { display: block; } /* הצגת כפתור המבורגר */
+
+            .nav-links {
+                display: none; /* הסתרה רגילה */
+                position: absolute; top: 75px; left: 0; width: 100%; 
+                background: #fff; flex-direction: column; text-align: center;
+                padding: 20px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                gap: 20px;
+            }
+            .nav-links.active { display: flex; } /* הצגה כשפעיל */
+
+            section { padding: 60px 20px; } /* רווחים קטנים יותר בין סקשנים */
+            .hero { padding: 80px 20px; }
+            h2 { font-size: 1.8rem; }
+
+            .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; gap: 30px; }
             .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
-            .stats-bar { flex-direction: column; gap: 40px; }
-            .nav-links { display: none; }
-            h2::after { right: 50% !important; transform: translateX(50%) !important; }
+            
+            .stats-bar { flex-direction: column; gap: 30px; padding: 40px 20px; }
+            .stat-item h3 { font-size: 2.2rem; }
+
             .testimonial-card { flex: 0 0 100%; }
+            .form-container-card, .referral-box { padding: 30px 20px; }
+            
+            h2::after { right: 50% !important; transform: translateX(50%) !important; }
         }
     </style>
 </head>
@@ -103,19 +122,20 @@
 
     <nav>
         <div class="nav-logo"><img src="logo.png" alt="ברוך ברגר"></div>
-        <ul class="nav-links">
-            <li><a href="#about">אודות</a></li>
-            <li><a href="#details">הפגישה</a></li>
-            <li><a href="#testimonials">המלצות</a></li>
-            <li><a href="#faq">שאלות</a></li>
-            <li><a href="#booking">קביעה</a></li>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="toggleMenu()">אודות</a></li>
+            <li><a href="#details" onclick="toggleMenu()">הפגישה</a></li>
+            <li><a href="#testimonials" onclick="toggleMenu()">המלצות</a></li>
+            <li><a href="#faq" onclick="toggleMenu()">שאלות</a></li>
+            <li><a href="#booking" onclick="toggleMenu()">קביעה</a></li>
         </ul>
     </nav>
 
     <section class="hero">
         <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
         <span class="slogan-main">"תהיה יותר טוב מהתירוצים שלך"</span>
-        <a href="#booking" class="btn-gold" style="width: auto;">קביעת פגישה אישית</a>
+        <a href="#booking" class="btn-gold" style="width: auto; display: inline-block;">קביעת פגישה אישית</a>
     </section>
 
     <div class="stats-bar">
@@ -185,7 +205,7 @@
     </section>
 
     <section id="faq">
-        <h2 style="text-align: center;">שאלות ותשובות</h2>
+        <h2>שאלות ותשובות</h2>
         <div class="faq-container">
             <details><summary>האם הפגישה כרוכה בתשלום?</summary><div class="faq-content">לא, פגישת ההיכרות ללא עלות וללא התחייבות.</div></details>
             <details><summary>מה עליי להביא לפגישה?</summary><div class="faq-content">דו"חות פנסיוניים אחרונים או אישור גישה למסלקה הפנסיונית.</div></details>
@@ -214,6 +234,14 @@
         let currentSlide = 0;
         let totalSlides = 0;
         let autoSlideInterval;
+
+        // Mobile Menu Toggle Function
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) {
+                nav.classList.toggle('active');
+            }
+        }
 
         function loadTestimonials() {
             fetch(SCRIPT_URL).then(res => res.json()).then(data => {
