@@ -140,6 +140,17 @@
         summary::before { content: '+ '; color: var(--gold); margin-left: 10px; }
         .faq-content { padding-top: 15px; color: #444; border-top: 1px solid #eee; margin-top: 10px; }
 
+        /* אנימציית דפיקה לכפתור הראשי */
+        @keyframes pulse-gold {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+
+        .btn-pulse {
+            animation: pulse-gold 3s infinite;
+        }
+
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
         footer { background: var(--navy); color: #fff; padding: 50px; text-align: center; }
 
@@ -179,10 +190,16 @@
     </nav>
 
     <header class="hero">
-        <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
-        <span class="slogan-main">"תהיה יותר טוב מהתירוצים שלך"</span>
-        <a href="#booking" class="btn-gold" style="width: auto; display: inline-block;">קביעת פגישה אישית</a>
-    </header>
+    <h1>ביטחון פנסיוני וכלכלי מעבר למצופה</h1>
+    <a href="#booking" class="btn-gold btn-pulse" style="width: auto; display: inline-block; margin-bottom: 10px;">
+        קביעת פגישה אישית
+    </a>
+    <span class="slogan-main" style="margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <span style="font-size: 1.2rem; opacity: 0.8;">✨</span>
+        "תהיה יותר טוב מהתירוצים שלך"
+        <span style="font-size: 1.2rem; opacity: 0.8;">✨</span>
+    </span>
+</header>
 
     <div class="stats-bar reveal">
         <div class="stat-item"><h3>10+</h3><p>שנות ניסיון</p></div>
@@ -231,13 +248,9 @@
                 <li>⚙️ <strong>הערך המקצועי:</strong> התאמה מדויקת למצבכם הרפואי – בניית מעטפת הגנה ללא כפילויות עם השב"ן.</li>
             </ul>
 
-            <div class="ins-highlight-box" style="background: #f1f5f9; border-right-color: #c5a059;">
-                💰 <strong>השורה התחתונה:</strong> ב-85% מהבדיקות שערכתי, הצלחתי לשפר את הכיסוי ולהוזיל את הפרמיה למשפחה.
-            </div>
-
-            <div style="background: var(--navy); color: white; padding: 12px; border-radius: 6px; margin-top: 20px; font-weight: 700; text-align: center;">
-                ⬅️ בואו נבדוק איך לשדרג את ההגנה שלכם ולחסוך כבר היום.
-            </div>
+            <a href="#booking" style="text-decoration: none; display: block; background: var(--navy); color: white; padding: 12px; border-radius: 6px; margin-top: 20px; font-weight: 700; text-align: center; transition: 0.3s;" onmouseover="this.style.backgroundColor='#1a368e'" onmouseout="this.style.backgroundColor='#1e40af'">
+    ⬅️ בואו נבדוק איך לשדרג את ההגנה שלכם ולחסוך כבר היום.
+</a>
         </div>
     </div>
 </section>
@@ -259,9 +272,9 @@
                 💰 <strong>השורה התחתונה:</strong> ב-85% מהבדיקות שערכתי, הצלחתי להוזיל את הפרמיה עבור לקוחותיי.
             </div>
 
-            <div style="background: var(--navy); color: white; padding: 12px; border-radius: 6px; margin-top: 20px; font-weight: 700; text-align: center;">
-                ⬅️ בואו נבדוק איך לשדרג את ההגנה שלכם ולחסוך כבר היום.
-            </div>
+             <a href="#booking" style="text-decoration: none; display: block; background: var(--navy); color: white; padding: 12px; border-radius: 6px; margin-top: 20px; font-weight: 700; text-align: center; transition: 0.3s;" onmouseover="this.style.backgroundColor='#1a368e'" onmouseout="this.style.backgroundColor='#1e40af'">
+    ⬅️ בואו נבדוק איך לשדרג את ההגנה שלכם ולחסוך כבר היום.
+</a>
         </div>
     </div>
 </section>
