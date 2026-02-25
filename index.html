@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ברוך ברגר | ייעוץ פנסיוני וביטוח</title>
+    <title>ברוך ברגר | סוכן פנסיוני וביטוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
@@ -81,6 +81,47 @@
         .prev-btn { left: 0; }
         .next-btn { right: 0; }
 
+        .ins-card {
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+                overflow: hidden;
+                margin-top: 40px;
+            }
+      .ins-card-header {
+                background: var(--navy); /* הכחול מהתמונה */
+                color: white;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+      .ins-card-body {
+    padding: 15px 20px; /* 15px למעלה ולמטה, 30px בצדדים */
+}
+       .ins-highlight-box {
+                background: #E5F3FD;
+                padding: 15px;
+                border-radius: 8px;
+                margin-top: 20px;
+                border-right: 5px solid var(--navy);
+                font-weight: 700;
+            }
+            .ins-card-body .check-list {
+    margin-top: 0;
+    padding-top: 0;
+}
+        .ins-card .check-list li::before {
+            content: none !important;
+        }
+        .ins-card .check-list li {
+            padding-right: 0 !important;
+            margin-bottom: 20px;
+        }
+
         /* Form Containers & Referral Box - חזרה למקור */
         .form-container-card, .referral-box { padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box; }
         .form-container-card { background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); }
@@ -129,6 +170,8 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#about" onclick="toggleMenu()">אודות</a></li>
             <li><a href="#details" onclick="toggleMenu()">הפגישה</a></li>
+            <li><a href="#health-ins" onclick="toggleMenu()">ביטוח בריאות</a></li>
+            <li><a href="#life-ins" onclick="toggleMenu()">ביטוח חיים</a></li>
             <li><a href="#testimonials" onclick="toggleMenu()">המלצות</a></li>
             <li><a href="#faq" onclick="toggleMenu()">שאלות</a></li>
             <li><a href="#booking" onclick="toggleMenu()">קביעה</a></li>
@@ -175,7 +218,55 @@
         </div>
     </section>
 
-    <section id="testimonials" class="testimonials reveal">
+    <section id="health-ins" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+    <div class="ins-card" style="scroll-margin-top: 5px; padding-top: 0;">
+        <div class="ins-card-header">
+            <span>🛡️</span> ביטוח בריאות: השקט הרפואי שלכם
+        </div>
+        <div class="ins-card-body">
+            <ul class="check-list">
+                <li>💊 <strong>הביטחון שלכם:</strong> כיסוי מלא לתרופות מחוץ לסל, השתלות וטיפולים מיוחדים בחו"ל.</li>
+                <li>👨‍⚕️ <strong>השקט הנפשי:</strong> בחירת המנתח הטוב ביותר עבורכם וקיצור תורים משמעותי במערכת הפרטית.</li>
+                <li>🧬 <strong>השקט הנפשי:</strong> גישה לטכנולוגיות רפואיות מתקדמות ובדיקות גנטיות שאינן בסל הציבורי.</li>
+                <li>⚙️ <strong>הערך המקצועי:</strong> התאמה מדויקת למצבכם הרפואי – בניית מעטפת הגנה ללא כפילויות עם השב"ן.</li>
+            </ul>
+
+            <div class="ins-highlight-box" style="background: #f1f5f9; border-right-color: #c5a059;">
+                💰 <strong>השורה התחתונה:</strong> ב-85% מהבדיקות שערכתי, הצלחתי לשפר את הכיסוי ולהוזיל את הפרמיה למשפחה.
+            </div>
+
+            <div style="background: var(--navy); color: white; padding: 12px; border-radius: 6px; margin-top: 20px; font-weight: 700; text-align: center;">
+                ⬅️ בואו נבדוק איך לשדרג את ההגנה שלכם ולחסוך כבר היום.
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="life-ins" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+    <div class="ins-card" style="scroll-margin-top: 5px; padding-top: 0;">
+        <div class="ins-card-header">
+            <span>🛡️</span> ביטוח חיים: העוגן הכלכלי שלכם
+        </div>
+        <div class="ins-card-body">
+            <ul class="check-list">
+                <li>👨‍👩‍👧‍👦 <strong>הביטחון שלכם:</strong> הגנה על איכות החיים של המשפחה ומניעת קריסה פיננסית ברגעי משבר.</li>
+                <li>🏠 <strong>השקט הנפשי:</strong> ידיעה ודאית שכל ההתחייבויות העתידיות שלכם מכוסות והיקירים לכם מוגנים.</li>
+                <li>🤵 <strong>השקט הנפשי:</strong> ידיעה ודאית שכל ההתחייבויות העתידיות שלכם מכוסות והיקירים לכם מוגנים.</li>
+                <li>⚙️ <strong>הערך המקצועי:</strong> התאמה מדויקת של הכיסוי לצרכים שלכם – ללא כפילויות וללא תשלומים מיותרים.</li>
+            </ul>
+
+            <div class="ins-highlight-box" style="background: #f1f5f9; border-right-color: #c5a059;">
+                💰 <strong>השורה התחתונה:</strong> ב-85% מהבדיקות שערכתי, הצלחתי להוזיל את הפרמיה עבור לקוחותיי.
+            </div>
+
+            <div style="background: var(--navy); color: white; padding: 12px; border-radius: 6px; margin-top: 20px; font-weight: 700; text-align: center;">
+                ⬅️ בואו נבדוק איך לשדרג את ההגנה שלכם ולחסוך כבר היום.
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="testimonials" class="testimonials reveal" style="scroll-margin-top: 95px; padding-top: 0;">
         <h2>מה לקוחות אומרים</h2>
         <div class="testimonials-container">
             <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10094;</button>
@@ -207,7 +298,7 @@
         </div>
     </section>
 
-    <section id="faq" class="reveal">
+    <section id="faq" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
         <h2>שאלות ותשובות</h2>
         <div class="faq-container">
             <details><summary>האם הפגישה כרוכה בתשלום?</summary><div class="faq-content">לא, פגישת ההיכרות ללא עלות וללא התחייבות.</div></details>
@@ -217,7 +308,7 @@
         </div>
     </section>
 
-    <section id="booking" class="reveal">
+    <section id="booking" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
         <div style="text-align: center;">
             <p style="color: var(--gold); font-weight: 700; margin-bottom: 10px;">תהיה יותר טוב מהתירוצים שלך.</p>
             <h2>קביעת פגישה אישית</h2>
