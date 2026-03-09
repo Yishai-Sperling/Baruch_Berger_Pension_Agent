@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ברוך ברגר | סוכן פנסיוני וביטוח</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
         :root {
@@ -14,13 +13,13 @@
         body { font-family: 'Assistant', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; }
 
         /* --- Animations --- */
-.reveal { 
-    opacity: 0; 
+.reveal {
+    opacity: 0;
     /* הסרנו את ה-translateY שגרם לקפיצה בחישוב המרחק */
-    transition: opacity 0.8s ease-out; 
+    transition: opacity 0.8s ease-out;
 }
-.reveal.active { 
-    opacity: 1; 
+.reveal.active {
+    opacity: 1;
 }
 
 /* אם אתה בכל זאת רוצה תנועה, נעשה אותה על התוכן הפנימי ולא על הסקשן עצמו */
@@ -91,15 +90,15 @@
         /* Titles with Gold Divider */
         h2 { position: relative; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2rem; color: var(--navy); }
         h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 3px; background-color: var(--gold); }
-        
+
         .testimonials h2, #referral h2, #faq h2, #booking h2 { text-align: center; }
         .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after { right: 50%; transform: translateX(50%); }
 
         section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 5px; }
-        
+
         .hero { padding: 140px 20px; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%); color: #fff; max-width: 100%; }
         .slogan-main { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 25px; display: block; }
-        
+
         .content-flex { display: flex; align-items: center; gap: 60px; }
         .content-flex.reverse { flex-direction: row-reverse; }
         .section-image img { width: 420px; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 15px 15px 0 var(--gold); }
@@ -171,6 +170,16 @@
         /* Accessibility Classes */
         .high-contrast { background: #000 !important; color: #fff !important; }
         .high-contrast * { background: transparent !important; color: #fff !important; border-color: #fff !important; }
+        .high-contrast .modal-box,
+        .high-contrast #access-menu{
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff;
+        }
+        .high-contrast .modal-box h2,
+        .high-contrast #access-menu h3{
+            color: #fff !important;
+        }
         .underline-links a { text-decoration: underline !important; font-weight: bold !important; color: #ff0 !important; }
 
         /* מרכוז אנכי מול הטקסט ב-Desktop */
@@ -304,12 +313,108 @@
             .testimonial-card { flex: 0 0 100%; }
             h2::after { right: 50% !important; transform: translateX(50%) !important; }
         }
+
+        /* Modal */
+
+        .modal-overlay{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .35s ease;
+        }
+
+        .modal-overlay.active{
+            opacity:1;
+            visibility:visible;
+        }
+
+                .modal-box::before{
+            content:"";
+            position:absolute;
+            top:0;
+            right:0;
+            width:100%;
+            height:6px;
+            background:linear-gradient(90deg,var(--gold),#e3c27a);
+            border-radius:12px 12px 0 0;
+        }
+
+        .modal-box{
+            background:white;
+            width:90%;
+            max-width:600px;
+            max-height:85vh;
+            overflow-y:auto;
+
+            padding:25px 35px 35px 35px;
+            border-radius:12px;
+
+            transform:translateY(50px) scale(.96);
+            transition:all .35s ease;
+
+            box-shadow:0 20px 60px rgba(0,0,0,0.25);
+
+            position:relative;
+        }
+        .modal-box h2{
+            margin-top:5px;
+            margin-bottom:20px;
+            font-size:1.8rem;
+        }
+
+        .modal-overlay.active .modal-box{
+            transform:translateY(0) scale(1);
+        }
+
+        .modal-close{
+            position:absolute;
+            top:15px;
+            left:15px;
+
+            border:none;
+            background:#f1f5f9;
+            width:35px;
+            height:35px;
+
+            border-radius:50%;
+            font-size:18px;
+            cursor:pointer;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            transition:all .2s;
+        }
+
+        .modal-close:hover{
+            background:var(--gold);
+            color:white;
+            transform:rotate(90deg);
+        }
+
+        .modal-overlay.closing{
+            opacity:0;
+        }
+
+        .modal-overlay.closing .modal-box{
+            transform:translateY(40px);
+        }
+
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav>
-        <div class="nav-logo"><img src="logo.png" alt="ברוך ברגר"></div>
+        <div class="nav-logo"><img src="logo.png" alt="ברוך ברגר - סוכן פנסיוני"></div>
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="פתח תפריט ניווט">☰</button>
         <ul class="nav-links" id="navLinks">
             <li><a href="#about" onclick="toggleMenu()">אודות</a></li>
@@ -477,9 +582,46 @@
 
     <footer>
     <p>© 2026 ברוך ברגר - סוכן פנסיוני וביטוח.
-        <a href="javascript:void(0)" onclick="alert('הצהרת נגישות: \nאתר זה עומד בתקן נגישות AA. \nבוצעו התאמות טכנולוגיות כולל תפריט נגישות, תיאור תמונות ומבנה סמנטי. \nלכל פנייה בנושא נגישות ניתן לפנות לבעל האתר בטלפון 052-3227785.')" style="color:var(--gold); margin-right: 15px; text-decoration: underline;">הצהרת נגישות</a>
+        <a href="javascript:void(0)" onclick="openAccessibility()" style="color:var(--gold); margin-right: 15px; text-decoration: underline;">
+        הצהרת נגישות
+</a>
     </p>
 </footer>
+    
+    <div id="accessibilityModal" class="modal-overlay">
+
+  <div class="modal-box">
+
+    <button class="modal-close" onclick="closeAccessibility()">✕</button>
+
+    <h2>הצהרת נגישות</h2>
+
+    <p><b>סטטוס נגישות:</b><br>
+    אתר זה עומד בדרישות תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013 ברמה AA ובהתאם להמלצות התקן הישראלי (ת"י 5568).</p>
+
+    <p><b>התאמות שבוצעו:</b></p>
+
+    <ul>
+      <li>תפריט נגישות עם הגדלת טקסט וניגודיות.</li>
+      <li>תמיכה מלאה בניווט מקלדת.</li>
+      <li>Alt-Text לכל התמונות והאייקונים.</li>
+      <li>מבנה כותרות סמנטי לקוראי מסך.</li>
+    </ul>
+
+    <p><b>נתקלתם בבעיה?</b><br>
+    אם מצאתם תקלה או שיש לכם הצעה לשיפור נשמח לשמוע.</p>
+
+    <p>
+    <b>רכז נגישות:</b> ברוך ברגר<br>
+    טלפון: 052-3227785<br>
+    מייל: barouch44@gmail.com
+    </p>
+
+    <p><b>תאריך עדכון ההצהרה:</b> מרץ 2026</p>
+
+  </div>
+
+</div>
 
     <div id="custom-accessibility">
     <button class="accessibility-trigger" onclick="toggleAccessMenu()" aria-label="תפריט נגישות">
@@ -584,6 +726,35 @@
         }
 
         function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
+
+        function openAccessibility(){
+            document.getElementById("accessibilityModal").classList.add("active");
+        }
+
+        function closeAccessibility(){
+            const modal = document.getElementById("accessibilityModal");
+
+            modal.classList.add("closing");
+
+            setTimeout(() => {
+                modal.classList.remove("active");
+                modal.classList.remove("closing");
+            }, 350); // זמן האנימציה
+        }
+
+        /* סגירה בלחיצה מחוץ לחלון */
+        document.getElementById("accessibilityModal").addEventListener("click",function(e){
+            if(e.target === this){
+                closeAccessibility();
+            }
+        });
+
+        /* סגירה עם ESC */
+        document.addEventListener("keydown",function(e){
+            if(e.key === "Escape"){
+                closeAccessibility();
+            }
+        });
 
         function toggleAccessMenu() {
             document.getElementById('access-menu').classList.toggle('access-menu-hidden');
