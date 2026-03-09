@@ -142,6 +142,11 @@
     object-fit: contain;
 }
 
+/* מוודא שכפתור הנגישות תמיד יופיע מעל הרקע */
+.access-icon, #accessibility-menu {
+    z-index: 9999 !important;
+}
+
 /* מרכוז אנכי מול הטקסט ב-Desktop */
 @media (min-width: 769px) {
     .content-flex {
@@ -577,4 +582,5 @@
 </script>
 </body>
 </html>
+
 
