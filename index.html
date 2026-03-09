@@ -110,73 +110,86 @@
             align-items: center;
         }
 
-        /* --- Video Styling Updated --- */
-.video-wrapper {
-    width: auto; /* מאפשר לרוחב להשתנות לפי הגובה */
-    height: 75vh; /* מגביל את הגובה ל-75% מגובה המסך של המשתמש */
-    aspect-ratio: 9 / 16; /* שומר על היחס האנכי המקורי */
-    max-height: 600px; /* מוודא שבמסכים ענקיים זה לא יגדל מדי */
-    border-radius: 4px;
-    box-shadow: 15px 15px 0 var(--gold);
-    overflow: hidden;
-    position: relative;
-    margin: 0 auto; /* מרכוז */
-}
+                /* --- Video Styling Updated --- */
+        .video-wrapper {
+            width: auto; /* מאפשר לרוחב להשתנות לפי הגובה */
+            height: 75vh; /* מגביל את הגובה ל-75% מגובה המסך של המשתמש */
+            aspect-ratio: 9 / 16; /* שומר על היחס האנכי המקורי */
+            max-height: 600px; /* מוודא שבמסכים ענקיים זה לא יגדל מדי */
+            border-radius: 4px;
+            box-shadow: 15px 15px 0 var(--gold);
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto; /* מרכוז */
+        }
 
-/* מוודא שהסרטון בתוך ה-wrapper ממלא אותו */
-.video-wrapper video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    background: #000;
-}
+        /* מוודא שהסרטון בתוך ה-wrapper ממלא אותו */
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
 
-/* זה החלק החדש: ברגע שהוידאו נכנס למסך מלא, אנחנו משנים את ההתנהגות שלו ל-contain */
-.video-wrapper video:fullscreen {
-    object-fit: contain;
-}
+        /* זה החלק החדש: ברגע שהוידאו נכנס למסך מלא, אנחנו משנים את ההתנהגות שלו ל-contain */
+        .video-wrapper video:fullscreen {
+            object-fit: contain;
+        }
 
-/* תמיכה בדפדפנים שונים (כמו ספארי או כרום ישן) */
-.video-wrapper video:-webkit-full-screen {
-    object-fit: contain;
-}
+        /* תמיכה בדפדפנים שונים (כמו ספארי או כרום ישן) */
+        .video-wrapper video:-webkit-full-screen {
+            object-fit: contain;
+        }
 
-/* מוודא שכפתור הנגישות תמיד יופיע מעל הרקע */
-.access-icon, #accessibility-menu {
-    z-index: 9999 !important;
-}
+        /* Accessibility Widget */
+        #custom-accessibility { position: fixed; bottom: 25px; right: 25px; z-index: 10002; direction: rtl; }
 
-/* מבטיח שתפריט הנגישות יהיה מעל הכל */
-#nagish-widget-container {
-    z-index: 999999 !important;
-}
+        .accessibility-trigger {
+            background: var(--gold); color: white; border: none; width: 55px; height: 55px;
+            border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s;
+        }
+        .accessibility-trigger:hover { transform: scale(1.1); }
+        .accessibility-trigger svg { width: 30px; height: 30px; }
 
-/* תיקון תצוגה לתוסף Accessibility.js */
-._772k_accessibility_main_container, 
-.accessibility-icon,
-#accessibility-icon {
-    z-index: 2147483647 !important; /* הערך הכי גבוה שאפשר */
-    position: fixed !important;
-}
+        #access-menu {
+            position: absolute; bottom: 30px; right: 0; background: white; width: 220px;
+            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 2px solid var(--gold);
+            padding: 15px; transition: all 0.3s ease;
+        }
+        .access-menu-hidden { opacity: 0; visibility: hidden; transform: translateY(20px); }
 
-/* מרכוז אנכי מול הטקסט ב-Desktop */
-@media (min-width: 769px) {
-    .content-flex {
-        align-items: center; /* זה מה שמרכז את הסרטון והטקסט אחד מול השני */
-    }
-}
+        #access-menu h3 { margin: 0 0 15px 0; font-size: 1.2rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        #access-menu button {
+            width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd;
+            border-radius: 6px; background: #f9f9f9; cursor: pointer; font-family: inherit;
+            font-weight: 600; text-align: right; transition: 0.2s;
+        }
+        #access-menu button:hover { background: var(--gold); color: white; border-color: var(--gold); }
 
-/* התאמה לנייד - שם אנחנו רוצים שזה יחזור להיות רחב יותר */
-@media (max-width: 768px) {
-    .video-wrapper {
-        height: auto;
-        width: 80%; /* בנייד נתפוס יותר רוחב */
-        max-height: 500px;
-        box-shadow: none;
-        border-bottom: 8px solid var(--gold);
-    }
-}
+        /* Accessibility Classes */
+        .high-contrast { background: #000 !important; color: #fff !important; }
+        .high-contrast * { background: transparent !important; color: #fff !important; border-color: #fff !important; }
+        .underline-links a { text-decoration: underline !important; font-weight: bold !important; color: #ff0 !important; }
+
+        /* מרכוז אנכי מול הטקסט ב-Desktop */
+        @media (min-width: 769px) {
+            .content-flex {
+                align-items: center; /* זה מה שמרכז את הסרטון והטקסט אחד מול השני */
+            }
+        }
+
+        /* התאמה לנייד - שם אנחנו רוצים שזה יחזור להיות רחב יותר */
+        @media (max-width: 768px) {
+            .video-wrapper {
+                height: auto;
+                width: 80%; /* בנייד נתפוס יותר רוחב */
+                max-height: 500px;
+                box-shadow: none;
+                border-bottom: 8px solid var(--gold);
+            }
+        }
 
         /* Stats */
         .stats-bar { background: var(--light-bg); padding: 60px 20px; display: flex; justify-content: center; gap: 80px; text-align: center; border-bottom: 1px solid #eee; }
@@ -189,10 +202,10 @@
         /* Carousel - המבנה המקורי שאהבת */
         .testimonials-container { position: relative; max-width: 1050px; margin: 50px auto; overflow: hidden; padding: 15px; }
         .testimonial-slider { display: flex; transition: transform 0.6s ease-in-out; gap: 20px; }
-        .testimonial-card { 
+        .testimonial-card {
             flex: 0 0 calc(33.333% - 14px);
-            background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); 
-            border-top: 4px solid var(--gold); box-sizing: border-box; min-height: 220px; 
+            background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border-top: 4px solid var(--gold); box-sizing: border-box; min-height: 220px;
             display: flex; flex-direction: column; justify-content: center; text-align: center;
         }
         .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
@@ -271,7 +284,7 @@
             animation: pulse-gold 3s infinite;
         }
 
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 100px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
         footer { background: var(--navy); color: #fff; padding: 50px; text-align: center; }
 
         /* --- MOBILE ADJUSTMENTS --- */
@@ -279,7 +292,7 @@
             nav { padding: 0 20px; flex-direction: row; }
             .menu-toggle { display: block; }
             .nav-links {
-                display: none; position: absolute; top: 75px; left: 0; width: 100%; 
+                display: none; position: absolute; top: 75px; left: 0; width: 100%;
                 background: #fff; flex-direction: column; text-align: center;
                 padding: 20px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); gap: 20px;
             }
@@ -414,7 +427,7 @@
             <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10095;</button>
             <div class="testimonial-slider" id="testimonialGrid"><p>טוען המלצות...</p></div>
         </div>
-        
+
         <div class="form-container-card">
             <h3>הוספת המלצה</h3>
             <form id="testimonialForm">
@@ -467,6 +480,21 @@
         <a href="javascript:void(0)" onclick="alert('הצהרת נגישות: \nאתר זה עומד בתקן נגישות AA. \nבוצעו התאמות טכנולוגיות כולל תפריט נגישות, תיאור תמונות ומבנה סמנטי. \nלכל פנייה בנושא נגישות ניתן לפנות לבעל האתר בטלפון 052-3227785.')" style="color:var(--gold); margin-right: 15px; text-decoration: underline;">הצהרת נגישות</a>
     </p>
 </footer>
+
+    <div id="custom-accessibility">
+    <button class="accessibility-trigger" onclick="toggleAccessMenu()" aria-label="תפריט נגישות">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6M6 8l6 2 6-2M12 10v4"/></svg>
+    </button>
+
+    <div id="access-menu" class="access-menu-hidden">
+        <h3>נגישות</h3>
+        <button onclick="adjustText(1.5)">➕ הגדלת טקסט</button>
+        <button onclick="adjustText(1)">🔄 איפוס טקסט</button>
+        <button onclick="toggleContrast()">🌓 ניגודיות גבוהה</button>
+        <button onclick="toggleLinks()">🔗 הדגשת קישורים</button>
+        <button onclick="toggleAccessMenu()" style="background: #eee; color: #333; margin-top: 10px;">סגור</button>
+    </div>
+</div>
 
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1ENsBQbcA3qVk9KyZ5XzVhn8UjJ84w8ZMpYrON34Q1Xu1D2fIAgKFezLf8Ztfq4_MIQ/exec';
@@ -557,6 +585,31 @@
 
         function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
 
+        function toggleAccessMenu() {
+            document.getElementById('access-menu').classList.toggle('access-menu-hidden');
+        }
+
+        function adjustText(scale) {
+            document.body.style.fontSize = scale === 1 ? '16px' : (16 * scale) + 'px';
+        }
+
+        function toggleContrast() {
+            document.body.classList.toggle('high-contrast');
+        }
+
+        function toggleLinks() {
+            document.body.classList.toggle('underline-links');
+        }
+
+        // סגירה בלחיצה מחוץ לתפריט
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('access-menu');
+            const trigger = document.querySelector('.accessibility-trigger');
+            if (!menu.contains(event.target) && !trigger.contains(event.target)) {
+                menu.classList.add('access-menu-hidden');
+            }
+        });
+
         document.getElementById('testimonialForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.getElementById('testBtn');
@@ -586,38 +639,5 @@
         }
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/accessibility@1.0.1/dist/main.bundle.js"></script>
-
-<script>
-    window.addEventListener('load', function() {
-        // הספריה הזו בגרסאות החדשות מאחסנת את עצמה תחת אובייקט חלון בשם Accessibility
-        if (window.Accessibility) {
-            new window.Accessibility({
-                icon: {
-                    position: {
-                        bottom: { size: 20, units: 'px' },
-                        left: { size: 20, units: 'px' }
-                    }
-                },
-                language: {
-                    textToSpeechLang: 'he-IL'
-                }
-            });
-        } else {
-            console.log("מנסה שיטה חלופית לטעינה...");
-            // במידה והשם הוא אחר ב-Bundle
-            try {
-                new Accessibility();
-            } catch(e) {
-                console.error("לא ניתן לאתחל את תוסף הנגישות:", e);
-            }
-        }
-    });
-</script>
 </body>
 </html>
-
-
-
-
-
