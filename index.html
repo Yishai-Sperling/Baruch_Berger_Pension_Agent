@@ -573,14 +573,35 @@
         }
     </script>
 
-<script src="https://cdn.jsdelivr.net/gh/miketaylr/accessibility.js@master/dist/accessibility.min.js"></script>
+<script src="https://unpkg.com/accessibility@1.0.1/dist/main.js"></script>
+
 <script>
-    // הגדרות בסיסיות להפעלת התוסף
+    // הפונקציה תרוץ רק אחרי שכל הדף והסקריפטים נטענו
     window.addEventListener('load', function() {
-        new Accessibility();
+        try {
+            // בדיקה אם הסקריפט נטען תחת השם Accessibility או הקיצור שלו
+            if (typeof Accessibility !== 'undefined') {
+                new Accessibility({
+                    icon: {
+                        position: {
+                            bottom: { size: 20, units: 'px' },
+                            left: { size: 20, units: 'px' }
+                        }
+                    },
+                    language: {
+                        textToSpeechLang: 'he-IL'
+                    }
+                });
+            } else {
+                console.error("Accessibility script loaded but class not found.");
+            }
+        } catch (e) {
+            console.error("Error initializing accessibility:", e);
+        }
     });
 </script>
 </body>
 </html>
+
 
 
