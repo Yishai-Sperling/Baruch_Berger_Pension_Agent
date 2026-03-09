@@ -33,10 +33,56 @@
 }
 
         /* Navigation */
-        nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.98); padding: 0 40px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); z-index: 1000; display: flex; justify-content: space-between; align-items: center; height: 75px; flex-direction: row-reverse; }
+        /* Navigation Updated */
+        nav {
+            position: fixed; /* שינוי מ-sticky ל-fixed כדי שהאנימציה תעבוד חלק */
+            top: 0;
+            width: 100%; /* מוודא שהוא תופס את כל הרוחב במצב fixed */
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            flex-direction: row-reverse;
+            box-sizing: border-box;
+            transition: transform 0.4s ease-in-out; /* אנימציית העלייה/ירידה */
+        }
+
+        /* קלאס שייתווסף דרך JS בזמן גלילה למטה */
+        .nav-hidden { transform: translateY(-100%); }
+
         .nav-logo img { height: 50px; width: auto; }
         .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 600; transition: color 0.3s; font-size: 1.1rem; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative; /* נדרש עבור הפס התחתון */
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        /* אפקט פס זהב ב-Hover */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .nav-links a:hover { color: var(--gold); }
 
         /* Mobile Menu Toggle */
@@ -267,7 +313,7 @@
         <div class="content-flex">
             <div class="section-video">
                 <div class="video-wrapper">
-                    <video controls preload="metadata" poster="baruch-profile.jpg">
+                    <video id="baruchVideo" controls preload="metadata" poster="baruch-profile.jpg">
                         <source src="baruch-video.mp4" type="video/mp4">
                         הדפדפן שלך לא תומך בנגן וידאו.
                     </video>
@@ -309,7 +355,7 @@
             <ul class="check-list">
                 <li>💊 <strong>הביטחון שלכם:</strong> כיסוי מלא לתרופות מחוץ לסל, השתלות וטיפולים מיוחדים בחו"ל.</li>
                 <li>👨‍⚕️ <strong>השקט הנפשי:</strong> בחירת המנתח הטוב ביותר עבורכם וקיצור תורים משמעותי במערכת הפרטית.</li>
-                <li>🧬 <strong>השקט הנפשי:</strong> גישה לטכנולוגיות רפואיות מתקדמות ובדיקות גנטיות שאינן בסל הציבורי.</li>
+                <li>🧬 <strong>הקדמה הטכנולוגית:</strong> גישה לטכנולוגיות רפואיות מתקדמות ובדיקות גנטיות שאינן בסל הציבורי.</li>
                 <li>⚙️ <strong>הערך המקצועי:</strong> התאמה מדויקת למצבכם הרפואי – בניית מעטפת הגנה ללא כפילויות עם השב"ן.</li>
             </ul>
 
@@ -329,7 +375,6 @@
             <ul class="check-list">
                 <li>👨‍👩‍👧‍👦 <strong>הביטחון שלכם:</strong> הגנה על איכות החיים של המשפחה ומניעת קריסה פיננסית ברגעי משבר.</li>
                 <li>🏠 <strong>השקט הנפשי:</strong> ידיעה ודאית שכל ההתחייבויות העתידיות שלכם מכוסות והיקירים לכם מוגנים.</li>
-                <li>🤵 <strong>השקט הנפשי:</strong> ידיעה ודאית שכל ההתחייבויות העתידיות שלכם מכוסות והיקירים לכם מוגנים.</li>
                 <li>⚙️ <strong>הערך המקצועי:</strong> התאמה מדויקת של הכיסוי לצרכים שלכם – ללא כפילויות וללא תשלומים מיותרים.</li>
             </ul>
 
@@ -403,7 +448,31 @@
 
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1ENsBQbcA3qVk9KyZ5XzVhn8UjJ84w8ZMpYrON34Q1Xu1D2fIAgKFezLf8Ztfq4_MIQ/exec';
-        
+
+        // Header Hide/Show logic + Mouse detection
+        let lastScrollY = window.scrollY;
+        const nav = document.querySelector('nav');
+
+        // זיהוי גלילה
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                // גוללים למטה - הסתר header
+                nav.classList.add('nav-hidden');
+            } else {
+                // גוללים למעלה - הצג header
+                nav.classList.remove('nav-hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // זיהוי עכבר בחלק העליון של המסך (למחשב בלבד)
+        window.addEventListener('mousemove', (e) => {
+            // אם העכבר נמצא ב-20 הפיקסלים העליונים של המסך
+            if (e.clientY <= 20) {
+                nav.classList.remove('nav-hidden');
+            }
+        });
+
         // Reveal Animations
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -484,7 +553,15 @@
 
         loadTestimonials();
         reveal(); // Initial reveal check
+
+        // החזרת תמונת ה-Poster בסיום הסרטון
+        const video = document.getElementById('baruchVideo');
+
+        if (video) {
+            video.addEventListener('ended', function() {
+                video.load(); // טוען מחדש את הסרטון ומחזיר את ה-Poster
+            });
+        }
     </script>
 </body>
 </html>
-
