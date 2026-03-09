@@ -152,6 +152,14 @@
     z-index: 999999 !important;
 }
 
+/* תיקון תצוגה לתוסף Accessibility.js */
+._772k_accessibility_main_container, 
+.accessibility-icon,
+#accessibility-icon {
+    z-index: 2147483647 !important; /* הערך הכי גבוה שאפשר */
+    position: fixed !important;
+}
+
 /* מרכוז אנכי מול הטקסט ב-Desktop */
 @media (min-width: 769px) {
     .content-flex {
@@ -578,19 +586,37 @@
         }
     </script>
 
-<script src="https://www.nagish.li/nagish.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/accessibility@1.0.1/dist/main.bundle.js"></script>
+
 <script>
-    window.nagish_config = {
-        is_manual: false,
-        position: 'left', // צד שמאל כדי לא להסתיר את הוואטסאפ
-        shape: 'circle',
-        color: '#c5a059', // צבע הזהב של המותג שלך
-        size: 'medium',
-        top: 20
-    };
+    window.addEventListener('load', function() {
+        // הספריה הזו בגרסאות החדשות מאחסנת את עצמה תחת אובייקט חלון בשם Accessibility
+        if (window.Accessibility) {
+            new window.Accessibility({
+                icon: {
+                    position: {
+                        bottom: { size: 20, units: 'px' },
+                        left: { size: 20, units: 'px' }
+                    }
+                },
+                language: {
+                    textToSpeechLang: 'he-IL'
+                }
+            });
+        } else {
+            console.log("מנסה שיטה חלופית לטעינה...");
+            // במידה והשם הוא אחר ב-Bundle
+            try {
+                new Accessibility();
+            } catch(e) {
+                console.error("לא ניתן לאתחל את תוסף הנגישות:", e);
+            }
+        }
+    });
 </script>
 </body>
 </html>
+
 
 
 
