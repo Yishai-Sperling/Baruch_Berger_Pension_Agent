@@ -2,8 +2,6 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ברוך ברגר | סוכן פנסיוני וביטוח</title>
     <style>
         html { scroll-behavior: smooth; }
         :root {
@@ -167,6 +165,18 @@
         }
         #access-menu button:hover { background: var(--gold); color: white; border-color: var(--gold); }
 
+        /* --- לוגיקת נגישות מתקדמת --- */
+
+/* 1. הגדלת טקסט לפי אחוזים */
+html { font-size: 16px; transition: font-size 0.2s; }
+html.size-150 { font-size: 24px !important; } /* 150% */
+html.size-200 { font-size: 32px !important; } /* 200% */
+
+
+
+
+
+
         /* Accessibility Classes */
         .high-contrast { background: #000 !important; color: #fff !important; }
         .high-contrast * { background: transparent !important; color: #fff !important; border-color: #fff !important; }
@@ -180,7 +190,31 @@
         .high-contrast #access-menu h3{
             color: #fff !important;
         }
+
+        /* הפיכת ה-Calendly לכהה בצורה מושלמת */
+        html.high-contrast .calendly-inline-widget iframe {
+            filter: invert(1) hue-rotate(180deg) !important; /* הוא כבר מתהפך עם ה-HTML */
+        }
+        /* תיקון שקיפות ב-Header ובמובייל בזמן ניגודיות */
+        html.high-contrast nav,
+        html.high-contrast .nav-links {
+            background-color: #000 !important; /* הופך לשחור אטום (כי המקור היה לבן) */
+            opacity: 1 !important;
+        }
+
         .underline-links a { text-decoration: underline !important; font-weight: bold !important; color: #ff0 !important; }
+
+        @media (max-width: 768px) {
+            html.high-contrast .nav-links {
+                background-color: #000 !important;
+                border: 1px solid #fff; /* מוסיף מסגרת דקה כדי להבדיל בין התפריט לשאר האתר */
+            }
+        }
+
+        /* מוודא שהקישורים בתפריט יהיו קריאים */
+        html.high-contrast .nav-links a {
+            color: #fff !important;
+        }
 
         /* מרכוז אנכי מול הטקסט ב-Desktop */
         @media (min-width: 769px) {
@@ -218,7 +252,7 @@
             display: flex; flex-direction: column; justify-content: center; text-align: center;
         }
         .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--navy); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; opacity: 0.8; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--navy); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: 0.6s; opacity: 0.8; }
         .slider-btn:hover { background: var(--gold); opacity: 1; }
         .prev-btn { left: 0; }
         .next-btn { right: 0; }
@@ -409,6 +443,8 @@
         }
 
     </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ברוך ברגר | סוכן פנסיוני וביטוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -528,8 +564,8 @@
     <section id="testimonials" class="testimonials reveal" style="scroll-margin-top: 95px; padding-top: 0;">
         <h2>מה לקוחות אומרים</h2>
         <div class="testimonials-container">
-            <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10094;</button>
-            <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10095;</button>
+            <button class="slider-btn next-btn" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="slider-btn prev-btn" onclick="moveSlide(1)">&#10095;</button>
             <div class="testimonial-slider" id="testimonialGrid"><p>טוען המלצות...</p></div>
         </div>
 
@@ -629,13 +665,17 @@
     </button>
 
     <div id="access-menu" class="access-menu-hidden">
-        <h3>נגישות</h3>
-        <button onclick="adjustText(1.5)">➕ הגדלת טקסט</button>
-        <button onclick="adjustText(1)">🔄 איפוס טקסט</button>
-        <button onclick="toggleContrast()">🌓 ניגודיות גבוהה</button>
-        <button onclick="toggleLinks()">🔗 הדגשת קישורים</button>
-        <button onclick="toggleAccessMenu()" style="background: #eee; color: #333; margin-top: 10px;">סגור</button>
+    <h3>נגישות</h3>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; background: #f4f4f4; padding: 10px; border-radius: 8px;">
+        <button onclick="changeFontSizeStep(-1)" style="margin:0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1;">➖</button>
+        <span id="font-size-display" style="font-weight: bold; color: var(--navy); min-width: 50px; text-align: center; display: inline-flex; align-items: center; justify-content: center; height: 40px;">100%</span>
+        <button onclick="changeFontSizeStep(1)" style="margin:0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; line-height: 1;">➕</button>
     </div>
+    <button onclick="changeFontSizeStep(0)">🔄 איפוס ל-100%</button>
+    <button onclick="toggleContrast()">🌓 ניגודיות גבוהה</button>
+    <button onclick="toggleLinks()">🔗 הדגשת קישורים</button>
+    <button onclick="toggleAccessMenu()" style="background: #eee; color: #333; margin-top: 10px;">סגור</button>
+</div>
 </div>
 
     <script>
@@ -722,7 +762,7 @@
             autoSlideInterval = setInterval(() => {
                 const visibleCards = window.innerWidth > 900 ? 3 : (window.innerWidth > 768 ? 2 : 1);
                 if (totalSlides > visibleCards) moveSlide(1);
-            }, 5000);
+            }, 20000);
         }
 
         function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
@@ -760,12 +800,40 @@
             document.getElementById('access-menu').classList.toggle('access-menu-hidden');
         }
 
-        function adjustText(scale) {
-            document.body.style.fontSize = scale === 1 ? '16px' : (16 * scale) + 'px';
+
+        let fontSizeStep = 0; // 0 = 100%, 1 = 150%, 2 = 200%
+
+        function changeFontSizeStep(direction) {
+            const htmlTag = document.documentElement;
+            const display = document.getElementById('font-size-display');
+        
+            if (direction === 0) {
+                fontSizeStep = 0;
+            } else {
+                fontSizeStep += direction;
+            }
+
+            // הגבלה בין 0 ל-2
+            if (fontSizeStep > 2) fontSizeStep = 2;
+            if (fontSizeStep < 0) fontSizeStep = 0;
+
+            // עדכון טקסט האחוזים בתצוגה
+            const percentage = fontSizeStep === 0 ? "100%" : (fontSizeStep === 1 ? "150%" : "200%");
+            if (display) display.innerText = percentage;
+
+            // הסרת קלאסים קיימים והוספת החדש
+            htmlTag.classList.remove('size-150', 'size-200');
+            if (fontSizeStep === 1) htmlTag.classList.add('size-150');
+            if (fontSizeStep === 2) htmlTag.classList.add('size-200');
         }
 
         function toggleContrast() {
-            document.body.classList.toggle('high-contrast');
+            // אנחנו מפעילים את הקלאס *רק* על ה-HTML
+            // זה יגרום לכל האתר להתהפך בצורה אחידה
+            document.documentElement.classList.toggle('high-contrast');
+            
+            // מוודא שה-body לא מקבל קלאס נוסף שמתנגש
+            document.body.classList.remove('high-contrast');
         }
 
         function toggleLinks() {
