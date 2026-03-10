@@ -849,21 +849,67 @@ html.size-200 { font-size: 32px !important; } /* 200% */
             }
         });
 
-        document.getElementById('testimonialForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('testBtn');
-            btn.disabled = true; btn.innerText = 'שולח...';
-            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ type: 'testimonial', name: document.getElementById('testName').value, text: document.getElementById('testText').value })})
-            .then(() => { document.getElementById('testimonialForm').reset(); document.getElementById('testMsg').style.display = 'block'; btn.innerText = 'נשלח!'; });
-        });
+        // טיפול בטופס המלצות
+    document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('testBtn');
+        const msg = document.getElementById('testMsg');
 
-        document.getElementById('referralForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('refBtn');
-            btn.disabled = true; btn.innerText = 'שולח...';
-            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ type: 'referral', name: document.getElementById('refName').value, phone: document.getElementById('refPhone').value })})
-            .then(() => { document.getElementById('referralForm').reset(); document.getElementById('refMsg').style.display = 'block'; btn.innerText = 'הפרטים הועברו'; });
+        btn.disabled = true;
+        btn.innerText = 'שולח...';
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                type: 'testimonial',
+                name: document.getElementById('testName').value,
+                text: document.getElementById('testText').value
+            })
+        })
+        .then(() => {
+            document.getElementById('testimonialForm').reset();
+            msg.style.display = 'block';
+            btn.innerText = 'נשלח בהצלחה!';
+
+            // שחרור הכפתור אחרי 3 שניות לשליחה נוספת
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerText = 'שלח המלצה';
+                msg.style.display = 'none';
+            }, 4000);
         });
+    });
+
+    // טיפול בטופס הפניית חבר
+    document.getElementById('referralForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('refBtn');
+        const msg = document.getElementById('refMsg');
+
+        btn.disabled = true;
+        btn.innerText = 'שולח...';
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                type: 'referral',
+                name: document.getElementById('refName').value,
+                phone: document.getElementById('refPhone').value
+            })
+        })
+        .then(() => {
+            document.getElementById('referralForm').reset();
+            msg.style.display = 'block';
+            btn.innerText = 'הפרטים הועברו!';
+
+            // שחרור הכפתור אחרי 3 שניות לשליחה נוספת
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerText = 'שלח פרטים';
+                msg.style.display = 'none';
+            }, 4000);
+        });
+    });
 
         loadTestimonials();
         reveal(); // Initial reveal check
