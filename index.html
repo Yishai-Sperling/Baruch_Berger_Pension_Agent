@@ -3,446 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        html { scroll-behavior: smooth; }
-        :root {
-            --navy: #1a2a44; --gold: #c5a059; --gold-hover: #b38f4d;
-            --bg: #ffffff; --light-bg: #f8f9fa; --text-dark: #1a2a44; --whatsapp: #25d366;
+    /* 1. Base Settings & Variables */
+    :root {
+        --navy: #1a2a44;
+        --gold: #c5a059;
+        --gold-hover: #b38f4d;
+        --bg: #ffffff;
+        --light-bg: #f8f9fa;
+        --text-dark: #1a2a44;
+        --whatsapp: #25d366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'Assistant', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: var(--text-dark);
+        background-color: var(--bg);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* 2. Navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        padding: 0 40px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 75px;
+        flex-direction: row-reverse;
+        box-sizing: border-box;
+        transition: transform 0.4s ease-in-out;
+    }
+
+    .nav-hidden { transform: translateY(-100%); }
+    .nav-logo img { height: 50px; width: auto; }
+    .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--navy);
+        font-weight: 600;
+        font-size: 1.1rem;
+        position: relative;
+        padding-bottom: 5px;
+        transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--gold);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--gold); }
+    .menu-toggle { display: none; background: none; border: none; font-size: 2rem; color: var(--navy); cursor: pointer; }
+
+    /* 3. Global Layout Components */
+    section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 5px; }
+
+    h2 { position: relative; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2rem; color: var(--navy); }
+    h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 3px; background-color: var(--gold); }
+
+    /* מרכוז כותרות ופסי זהב עבור סקשנים ספציפיים */
+        .testimonials h2, #referral h2, #faq h2, #booking h2, #portfolio h2 {
+            text-align: center;
         }
-        body { font-family: 'Assistant', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; }
-
-        /* --- Animations --- */
-.reveal {
-    opacity: 0;
-    /* הסרנו את ה-translateY שגרם לקפיצה בחישוב המרחק */
-    transition: opacity 0.8s ease-out;
-}
-.reveal.active {
-    opacity: 1;
-}
-
-/* אם אתה בכל זאת רוצה תנועה, נעשה אותה על התוכן הפנימי ולא על הסקשן עצמו */
-.reveal > div {
-    transform: translateY(30px);
-    transition: transform 0.8s ease-out;
-}
-.reveal.active > div {
-    transform: translateY(0);
-}
-
-        /* Navigation */
-        /* Navigation Updated */
-        nav {
-            position: fixed; /* שינוי מ-sticky ל-fixed כדי שהאנימציה תעבוד חלק */
-            top: 0;
-            width: 100%; /* מוודא שהוא תופס את כל הרוחב במצב fixed */
-            background: rgba(255, 255, 255, 0.98);
-            padding: 0 40px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 75px;
-            flex-direction: row-reverse;
-            box-sizing: border-box;
-            transition: transform 0.4s ease-in-out; /* אנימציית העלייה/ירידה */
-        }
-
-        /* קלאס שייתווסף דרך JS בזמן גלילה למטה */
-        .nav-hidden { transform: translateY(-100%); }
-
-        .nav-logo img { height: 50px; width: auto; }
-        .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--navy);
-            font-weight: 600;
-            font-size: 1.1rem;
-            position: relative; /* נדרש עבור הפס התחתון */
-            padding-bottom: 5px;
-            transition: color 0.3s;
-        }
-
-        /* אפקט פס זהב ב-Hover */
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover { color: var(--gold); }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle { display: none; background: none; border: none; font-size: 2rem; color: var(--navy); cursor: pointer; }
-
-        /* Titles with Gold Divider */
-        h2 { position: relative; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2rem; color: var(--navy); }
-        h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 3px; background-color: var(--gold); }
-
-        .testimonials h2, #referral h2, #faq h2, #booking h2 { text-align: center; }
-        .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after { right: 50%; transform: translateX(50%); }
-
-        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 5px; }
-
-        .hero { padding: 140px 20px; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%); color: #fff; max-width: 100%; }
-        .slogan-main { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 25px; display: block; }
-
-        .content-flex { display: flex; align-items: center; gap: 60px; }
-        .content-flex.reverse { flex-direction: row-reverse; }
-        .section-image img { width: 420px; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 15px 15px 0 var(--gold); }
-        /* --- Video Styling --- */
-        .section-video {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .testimonials h2::after, #referral h2::after, #faq h2::after, #booking h2::after, #portfolio h2::after {
+            right: 50%;
+            transform: translateX(50%);
         }
 
-                /* --- Video Styling Updated --- */
-        .video-wrapper {
-            width: auto; /* מאפשר לרוחב להשתנות לפי הגובה */
-            height: 75vh; /* מגביל את הגובה ל-75% מגובה המסך של המשתמש */
-            aspect-ratio: 9 / 16; /* שומר על היחס האנכי המקורי */
-            max-height: 600px; /* מוודא שבמסכים ענקיים זה לא יגדל מדי */
-            border-radius: 4px;
-            box-shadow: 15px 15px 0 var(--gold);
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto; /* מרכוז */
+    .content-flex { display: flex; align-items: center; gap: 60px; }
+    .content-flex.reverse { flex-direction: row-reverse; }
+
+    /* 4. Hero & Stats */
+    .hero {
+        padding: 140px 20px;
+        text-align: center;
+        background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
+        color: #fff;
+        max-width: 100%;
+    }
+    .slogan-main { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 25px; display: block; }
+
+    .stats-bar {
+        background: var(--light-bg);
+        padding: 60px 20px;
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+    .stat-item h3 { font-size: 2.8rem; color: var(--gold); margin: 0; font-weight: 700; }
+
+    /* 5. Media & Video */
+    .section-image img { width: 420px; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 15px 15px 0 var(--gold); }
+    .section-video { display: flex; justify-content: center; align-items: center; }
+
+    .video-wrapper {
+        width: auto;
+        height: 75vh;
+        aspect-ratio: 9 / 16;
+        max-height: 600px;
+        border-radius: 4px;
+        box-shadow: 15px 15px 0 var(--gold);
+        overflow: hidden;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+    .video-wrapper video:fullscreen { object-fit: contain; }
+    .video-wrapper video:-webkit-full-screen { object-fit: contain; }
+
+    /* 6. Professional Gallery (Flyers) */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        padding: 20px 0;
+    }
+
+    .gallery-item {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1.41;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background: #fff;
+        border: 1px solid #eee;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(30%) brightness(0.95);
+        transition: all 0.5s ease;
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(26, 42, 68, 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-overlay span {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid var(--gold);
+        padding: 12px 24px;
+        transform: translateY(10px);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover { transform: translateY(-8px); box-shadow: 0 15px 45px rgba(0,0,0,0.15); }
+    .gallery-item:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.08); }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-item:hover .gallery-overlay span { transform: translateY(0); }
+
+    /* 7. Insurance Cards */
+    .ins-card { background: #fff; border-radius: 12px; box-shadow: 0 5px 30px rgba(0,0,0,0.08); overflow: hidden; margin-top: 40px; }
+    .ins-card-header { background: var(--navy); color: white; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 1.5rem; font-weight: 700; }
+    .ins-card-body { padding: 15px 20px; }
+    .ins-highlight-box { background: #E5F3FD; padding: 15px; border-radius: 8px; margin-top: 20px; border-right: 5px solid var(--navy); font-weight: 700; }
+
+    .check-list { list-style: none; padding: 0; margin: 30px 0; }
+    .check-list li { position: relative; padding-right: 35px; margin-bottom: 15px; font-weight: 500; font-size: 1.1rem; }
+    .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
+    .ins-card .check-list li::before { content: none !important; }
+    .ins-card .check-list li { padding-right: 0 !important; margin-bottom: 20px; }
+
+    /* 8. Testimonials & Carousel */
+    .testimonials-container { position: relative; max-width: 1050px; margin: 50px auto; overflow: hidden; padding: 15px; }
+    .testimonial-slider { display: flex; transition: transform 0.6s ease-in-out; gap: 20px; }
+    .testimonial-card {
+        flex: 0 0 calc(33.333% - 14px);
+        background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        border-top: 4px solid var(--gold); box-sizing: border-box; min-height: 220px;
+        display: flex; flex-direction: column; justify-content: center; text-align: center;
+    }
+    .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--navy); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: 0.6s; opacity: 0.8; }
+    .slider-btn:hover { background: var(--gold); opacity: 1; }
+    .prev-btn { left: 0; }
+    .next-btn { right: 0; }
+
+    /* 9. Forms & FAQ */
+    .form-container-card, .referral-box { padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box; }
+    .form-container-card { background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); }
+    .referral-box { background: var(--navy); color: white; }
+    .referral-box h2, .referral-box p { color: #ffffff !important; }
+
+    form { display: flex; flex-direction: column; align-items: center; width: 100%; }
+    input, textarea { width: 100%; max-width: 500px; padding: 14px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem; text-align: center; }
+    .btn-gold { background: var(--gold); color: #fff; padding: 16px 40px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; width: 100%; max-width: 500px; font-size: 1.1rem; }
+    .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
+
+    .faq-container { max-width: 850px; margin: 50px auto 0; text-align: right; }
+    details { background: var(--light-bg); margin-bottom: 15px; padding: 20px; border-radius: 8px; cursor: pointer; }
+    summary { font-weight: 700; color: var(--navy); list-style: none; font-size: 1.1rem; }
+    summary::before { content: '+ '; color: var(--gold); margin-left: 10px; }
+    .faq-content { padding-top: 15px; color: #444; border-top: 1px solid #eee; margin-top: 10px; }
+
+    /* 10. Animations & Floating Elements */
+    .reveal { opacity: 0; transition: opacity 0.8s ease-out; }
+    .reveal.active { opacity: 1; }
+    .reveal > div { transform: translateY(30px); transition: transform 0.8s ease-out; }
+    .reveal.active > div { transform: translateY(0); }
+
+    @keyframes pulse-gold {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+    }
+    .btn-pulse { animation: pulse-gold 3s infinite; }
+
+    .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
+    footer { background: var(--navy); color: #fff; padding: 50px; text-align: center; }
+
+    /* 11. Accessibility Widget & Modal Base */
+    #custom-accessibility { position: fixed; bottom: 25px; right: 25px; z-index: 10002; direction: rtl; }
+    .accessibility-trigger { background: var(--gold); color: white; border: none; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s; }
+    .accessibility-trigger:hover { transform: scale(1.1); }
+    .accessibility-trigger svg { width: 30px; height: 30px; }
+
+    #access-menu { position: absolute; bottom: 30px; right: 0; background: white; width: 220px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 2px solid var(--gold); padding: 15px; transition: all 0.3s ease; }
+    .access-menu-hidden { opacity: 0; visibility: hidden; transform: translateY(20px); }
+    #access-menu h3 { margin: 0 0 15px 0; font-size: 1.2rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    #access-menu button { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 6px; background: #f9f9f9; cursor: pointer; font-family: inherit; font-weight: 600; text-align: right; transition: 0.2s; }
+    #access-menu button:hover { background: var(--gold); color: white; border-color: var(--gold); }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 10000; opacity: 0; visibility: hidden; transition: opacity .35s ease; }
+    .modal-overlay.active { opacity:1; visibility:visible; }
+    .modal-box::before { content:""; position:absolute; top:0; right:0; width:100%; height:6px; background:linear-gradient(90deg,var(--gold),#e3c27a); border-radius:12px 12px 0 0; }
+    .modal-box { background:white; width:90%; max-width:600px; max-height:85vh; overflow-y:auto; padding:25px 35px 35px 35px; border-radius:12px; transform:translateY(50px) scale(.96); transition:all .35s ease; box-shadow:0 20px 60px rgba(0,0,0,0.25); position:relative; }
+    .modal-box h2 { margin-top:5px; margin-bottom:20px; font-size:1.8rem; }
+    .modal-overlay.active .modal-box { transform:translateY(0) scale(1); }
+    .modal-close { position:absolute; top:15px; left:15px; border:none; background:#f1f5f9; width:35px; height:35px; border-radius:50%; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+    .modal-close:hover { background:var(--gold); color:white; transform:rotate(90deg); }
+    .modal-overlay.closing { opacity:0; }
+    .modal-overlay.closing .modal-box { transform:translateY(40px); }
+
+    /* 12. Advanced Accessibility Logic (States) */
+    html { font-size: 16px; transition: font-size 0.2s; }
+    html.size-150 { font-size: 24px !important; }
+    html.size-200 { font-size: 32px !important; }
+
+    .high-contrast { background: #000 !important; color: #fff !important; }
+    .high-contrast * { background: transparent !important; color: #fff !important; border-color: #fff !important; }
+    .high-contrast .modal-box, .high-contrast #access-menu { background: #000 !important; color: #fff !important; border: 2px solid #fff; }
+    .high-contrast .modal-box h2, .high-contrast #access-menu h3 { color: #fff !important; }
+    html.high-contrast .calendly-inline-widget iframe { filter: invert(1) hue-rotate(180deg) !important; }
+    html.high-contrast nav, html.high-contrast .nav-links { background-color: #000 !important; opacity: 1 !important; }
+    html.high-contrast .nav-links a { color: #fff !important; }
+    html.high-contrast .gallery-item { border: 2px solid #fff !important; }
+    html.high-contrast .gallery-overlay { background: rgba(0, 0, 0, 0.85) !important; }
+    .underline-links a { text-decoration: underline !important; font-weight: bold !important; color: #ff0 !important; }
+
+    /* 13. Responsive Adjustments (Desktop vs Mobile) */
+    @media (min-width: 769px) {
+        .content-flex { align-items: center; }
+    }
+
+    @media (max-width: 768px) {
+        nav { padding: 0 20px; flex-direction: row; }
+        .menu-toggle { display: block; }
+        .nav-links {
+            display: none; position: absolute; top: 75px; left: 0; width: 100%;
+            background: #fff; flex-direction: column; text-align: center;
+            padding: 20px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); gap: 20px;
         }
-
-        /* מוודא שהסרטון בתוך ה-wrapper ממלא אותו */
-        .video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            background: #000;
-        }
-
-        /* זה החלק החדש: ברגע שהוידאו נכנס למסך מלא, אנחנו משנים את ההתנהגות שלו ל-contain */
-        .video-wrapper video:fullscreen {
-            object-fit: contain;
-        }
-
-        /* תמיכה בדפדפנים שונים (כמו ספארי או כרום ישן) */
-        .video-wrapper video:-webkit-full-screen {
-            object-fit: contain;
-        }
-
-        /* Accessibility Widget */
-        #custom-accessibility { position: fixed; bottom: 25px; right: 25px; z-index: 10002; direction: rtl; }
-
-        .accessibility-trigger {
-            background: var(--gold); color: white; border: none; width: 55px; height: 55px;
-            border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s;
-        }
-        .accessibility-trigger:hover { transform: scale(1.1); }
-        .accessibility-trigger svg { width: 30px; height: 30px; }
-
-        #access-menu {
-            position: absolute; bottom: 30px; right: 0; background: white; width: 220px;
-            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 2px solid var(--gold);
-            padding: 15px; transition: all 0.3s ease;
-        }
-        .access-menu-hidden { opacity: 0; visibility: hidden; transform: translateY(20px); }
-
-        #access-menu h3 { margin: 0 0 15px 0; font-size: 1.2rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        #access-menu button {
-            width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd;
-            border-radius: 6px; background: #f9f9f9; cursor: pointer; font-family: inherit;
-            font-weight: 600; text-align: right; transition: 0.2s;
-        }
-        #access-menu button:hover { background: var(--gold); color: white; border-color: var(--gold); }
-
-        /* --- לוגיקת נגישות מתקדמת --- */
-
-/* 1. הגדלת טקסט לפי אחוזים */
-html { font-size: 16px; transition: font-size 0.2s; }
-html.size-150 { font-size: 24px !important; } /* 150% */
-html.size-200 { font-size: 32px !important; } /* 200% */
-
-
-
-
-
-
-        /* Accessibility Classes */
-        .high-contrast { background: #000 !important; color: #fff !important; }
-        .high-contrast * { background: transparent !important; color: #fff !important; border-color: #fff !important; }
-        .high-contrast .modal-box,
-        .high-contrast #access-menu{
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff;
-        }
-        .high-contrast .modal-box h2,
-        .high-contrast #access-menu h3{
-            color: #fff !important;
-        }
-
-        /* הפיכת ה-Calendly לכהה בצורה מושלמת */
-        html.high-contrast .calendly-inline-widget iframe {
-            filter: invert(1) hue-rotate(180deg) !important; /* הוא כבר מתהפך עם ה-HTML */
-        }
-        /* תיקון שקיפות ב-Header ובמובייל בזמן ניגודיות */
-        html.high-contrast nav,
-        html.high-contrast .nav-links {
-            background-color: #000 !important; /* הופך לשחור אטום (כי המקור היה לבן) */
-            opacity: 1 !important;
-        }
-
-        .underline-links a { text-decoration: underline !important; font-weight: bold !important; color: #ff0 !important; }
-
-        @media (max-width: 768px) {
-            html.high-contrast .nav-links {
-                background-color: #000 !important;
-                border: 1px solid #fff; /* מוסיף מסגרת דקה כדי להבדיל בין התפריט לשאר האתר */
-            }
-        }
-
-        /* מוודא שהקישורים בתפריט יהיו קריאים */
-        html.high-contrast .nav-links a {
-            color: #fff !important;
-        }
-
-        /* מרכוז אנכי מול הטקסט ב-Desktop */
-        @media (min-width: 769px) {
-            .content-flex {
-                align-items: center; /* זה מה שמרכז את הסרטון והטקסט אחד מול השני */
-            }
-        }
-
-        /* התאמה לנייד - שם אנחנו רוצים שזה יחזור להיות רחב יותר */
-        @media (max-width: 768px) {
-            .video-wrapper {
-                height: auto;
-                width: 80%; /* בנייד נתפוס יותר רוחב */
-                max-height: 500px;
-                box-shadow: none;
-                border-bottom: 8px solid var(--gold);
-            }
-        }
-
-        /* Stats */
-        .stats-bar { background: var(--light-bg); padding: 60px 20px; display: flex; justify-content: center; gap: 80px; text-align: center; border-bottom: 1px solid #eee; }
-        .stat-item h3 { font-size: 2.8rem; color: var(--gold); margin: 0; font-weight: 700; }
-
-        .check-list { list-style: none; padding: 0; margin: 30px 0; }
-        .check-list li { position: relative; padding-right: 35px; margin-bottom: 15px; font-weight: 500; font-size: 1.1rem; }
-        .check-list li::before { content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
-
-        /* Carousel - המבנה המקורי שאהבת */
-        .testimonials-container { position: relative; max-width: 1050px; margin: 50px auto; overflow: hidden; padding: 15px; }
-        .testimonial-slider { display: flex; transition: transform 0.6s ease-in-out; gap: 20px; }
-        .testimonial-card {
-            flex: 0 0 calc(33.333% - 14px);
-            background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-            border-top: 4px solid var(--gold); box-sizing: border-box; min-height: 220px;
-            display: flex; flex-direction: column; justify-content: center; text-align: center;
-        }
-        .testimonial-card h4 { margin-top: 15px; color: var(--navy); }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--navy); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: 0.6s; opacity: 0.8; }
-        .slider-btn:hover { background: var(--gold); opacity: 1; }
-        .prev-btn { left: 0; }
-        .next-btn { right: 0; }
-
-        .ins-card {
-                background: #fff;
-                border-radius: 12px;
-                box-shadow: 0 5px 30px rgba(0,0,0,0.08);
-                overflow: hidden;
-                margin-top: 40px;
-            }
-      .ins-card-header {
-                background: var(--navy); /* הכחול מהתמונה */
-                color: white;
-                padding: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 15px;
-                font-size: 1.5rem;
-                font-weight: 700;
-            }
-      .ins-card-body {
-    padding: 15px 20px; /* 15px למעלה ולמטה, 30px בצדדים */
-}
-       .ins-highlight-box {
-                background: #E5F3FD;
-                padding: 15px;
-                border-radius: 8px;
-                margin-top: 20px;
-                border-right: 5px solid var(--navy);
-                font-weight: 700;
-            }
-            .ins-card-body .check-list {
-    margin-top: 0;
-    padding-top: 0;
-}
-        .ins-card .check-list li::before {
-            content: none !important;
-        }
-        .ins-card .check-list li {
-            padding-right: 0 !important;
-            margin-bottom: 20px;
-        }
-
-        /* Form Containers & Referral Box - חזרה למקור */
-        .form-container-card, .referral-box { padding: 50px; border-radius: 12px; max-width: 700px; margin: 50px auto; text-align: center; box-sizing: border-box; }
-        .form-container-card { background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); }
-        .referral-box { background: var(--navy); color: white; }
-        .referral-box h2, .referral-box p { color: #ffffff !important; }
-
-        form { display: flex; flex-direction: column; align-items: center; width: 100%; }
-        input, textarea { width: 100%; max-width: 500px; padding: 14px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem; text-align: center; }
-        .btn-gold { background: var(--gold); color: #fff; padding: 16px 40px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; width: 100%; max-width: 500px; font-size: 1.1rem; }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
-
-        /* FAQ - חזרה למקור */
-        .faq-container { max-width: 850px; margin: 50px auto 0; text-align: right; }
-        details { background: var(--light-bg); margin-bottom: 15px; padding: 20px; border-radius: 8px; cursor: pointer; }
-        summary { font-weight: 700; color: var(--navy); list-style: none; font-size: 1.1rem; }
-        summary::before { content: '+ '; color: var(--gold); margin-left: 10px; }
-        .faq-content { padding-top: 15px; color: #444; border-top: 1px solid #eee; margin-top: 10px; }
-
-        /* אנימציית דפיקה לכפתור הראשי */
-        @keyframes pulse-gold {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
-        }
-
-        .btn-pulse {
-            animation: pulse-gold 3s infinite;
-        }
-
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: var(--whatsapp); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
-        footer { background: var(--navy); color: #fff; padding: 50px; text-align: center; }
-
-        /* --- MOBILE ADJUSTMENTS --- */
-        @media (max-width: 768px) {
-            nav { padding: 0 20px; flex-direction: row; }
-            .menu-toggle { display: block; }
-            .nav-links {
-                display: none; position: absolute; top: 75px; left: 0; width: 100%;
-                background: #fff; flex-direction: column; text-align: center;
-                padding: 20px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); gap: 20px;
-            }
-            .nav-links.active { display: flex; }
-            section { padding: 40px 20px; scroll-margin-top: 50px; }
-            .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; gap: 30px; }
-            .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
-            .stats-bar { flex-direction: column; gap: 30px; }
-            .testimonial-card { flex: 0 0 100%; }
-            h2::after { right: 50% !important; transform: translateX(50%) !important; }
-        }
-
-        /* Modal */
-
-        .modal-overlay{
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity .35s ease;
-        }
-
-        .modal-overlay.active{
-            opacity:1;
-            visibility:visible;
-        }
-
-                .modal-box::before{
-            content:"";
-            position:absolute;
-            top:0;
-            right:0;
-            width:100%;
-            height:6px;
-            background:linear-gradient(90deg,var(--gold),#e3c27a);
-            border-radius:12px 12px 0 0;
-        }
-
-        .modal-box{
-            background:white;
-            width:90%;
-            max-width:600px;
-            max-height:85vh;
-            overflow-y:auto;
-
-            padding:25px 35px 35px 35px;
-            border-radius:12px;
-
-            transform:translateY(50px) scale(.96);
-            transition:all .35s ease;
-
-            box-shadow:0 20px 60px rgba(0,0,0,0.25);
-
-            position:relative;
-        }
-        .modal-box h2{
-            margin-top:5px;
-            margin-bottom:20px;
-            font-size:1.8rem;
-        }
-
-        .modal-overlay.active .modal-box{
-            transform:translateY(0) scale(1);
-        }
-
-        .modal-close{
-            position:absolute;
-            top:15px;
-            left:15px;
-
-            border:none;
-            background:#f1f5f9;
-            width:35px;
-            height:35px;
-
-            border-radius:50%;
-            font-size:18px;
-            cursor:pointer;
-
-            display:flex;
-            align-items:center;
-            justify-content:center;
-
-            transition:all .2s;
-        }
-
-        .modal-close:hover{
-            background:var(--gold);
-            color:white;
-            transform:rotate(90deg);
-        }
-
-        .modal-overlay.closing{
-            opacity:0;
-        }
-
-        .modal-overlay.closing .modal-box{
-            transform:translateY(40px);
-        }
-
-    </style>
+        .nav-links.active { display: flex; }
+        section { padding: 40px 20px; scroll-margin-top: 50px; }
+        .content-flex, .content-flex.reverse { flex-direction: column; text-align: center; gap: 30px; }
+        .section-image img { width: 100%; height: auto; box-shadow: none; border-bottom: 8px solid var(--gold); }
+        .video-wrapper { height: auto; width: 80%; max-height: 500px; box-shadow: none; border-bottom: 8px solid var(--gold); }
+        .stats-bar { flex-direction: column; gap: 30px; }
+        .testimonial-card { flex: 0 0 100%; }
+        h2::after { right: 50% !important; transform: translateX(50%) !important; }
+        html.high-contrast .nav-links { background-color: #000 !important; border: 1px solid #fff; }
+    }
+</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ברוך ברגר | סוכן פנסיוני וביטוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -457,6 +323,7 @@ html.size-200 { font-size: 32px !important; } /* 200% */
             <li><a href="#details" onclick="toggleMenu()">הפגישה</a></li>
             <li><a href="#health-ins" onclick="toggleMenu()">ביטוח בריאות</a></li>
             <li><a href="#life-ins" onclick="toggleMenu()">ביטוח חיים</a></li>
+            <li><a href="#portfolio" onclick="toggleMenu()">מידע מקצועי</a></li>
             <li><a href="#testimonials" onclick="toggleMenu()">המלצות</a></li>
             <li><a href="#faq" onclick="toggleMenu()">שאלות</a></li>
             <li><a href="#booking" onclick="toggleMenu()">קביעה</a></li>
@@ -518,7 +385,7 @@ html.size-200 { font-size: 32px !important; } /* 200% */
         </div>
     </section>
 
-    <section id="health-ins" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+    <section id="health-ins" class="reveal" style="scroll-margin-top: 75px; padding-top: 0;">
     <div class="ins-card" style="scroll-margin-top: 5px; padding-top: 0;">
         <div class="ins-card-header">
             <span>🛡️</span> ביטוח בריאות: השקט הרפואי שלכם
@@ -538,7 +405,7 @@ html.size-200 { font-size: 32px !important; } /* 200% */
     </div>
 </section>
 
-<section id="life-ins" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+<section id="life-ins" class="reveal" style="scroll-margin-top: 75px; padding-top: 0;">
     <div class="ins-card" style="scroll-margin-top: 5px; padding-top: 0;">
         <div class="ins-card-header">
             <span>🛡️</span> ביטוח חיים: העוגן הכלכלי שלכם
@@ -561,7 +428,41 @@ html.size-200 { font-size: 32px !important; } /* 200% */
     </div>
 </section>
 
-    <section id="testimonials" class="testimonials reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+    <section id="portfolio" class="reveal" style="background: var(--light-bg);">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h2>כלים ומידע מקצועי</h2>
+        <p>ריכזתי עבורכם פלאיירים ומדריכים מהירים שעוזרים לעשות סדר בעולם הביטוח</p>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('flyer1.jpg')">
+            <img src="flyer1.jpg" alt="קופת גמל להשקעה">
+            <div class="gallery-overlay">
+                <span>קופת גמל להשקעה</span>
+            </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('flyer2.jpg')">
+            <img src="flyer2.jpg" alt="ביטוח בריאות">
+            <div class="gallery-overlay">
+                <span>ביטוח בריאות</span>
+            </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('flyer3.jpg')">
+            <img src="flyer3.jpg" alt="תכנון פנסיוני">
+            <div class="gallery-overlay">
+                <span>תכנון העתיד הפנסיוני</span>
+            </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('card.jpg')">
+            <img src="card.jpg" alt="כרטיס ביקור">
+            <div class="gallery-overlay">
+                <span>כרטיס ביקור דיגיטלי</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="testimonials" class="testimonials reveal" style="scroll-margin-top: 65px; padding-top: 0;">
         <h2>מה לקוחות אומרים</h2>
         <div class="testimonials-container">
             <button class="slider-btn next-btn" onclick="moveSlide(-1)">&#10094;</button>
@@ -593,7 +494,7 @@ html.size-200 { font-size: 32px !important; } /* 200% */
         </div>
     </section>
 
-    <section id="faq" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+    <section id="faq" class="reveal" style="scroll-margin-top: 75px; padding-top: 0;">
         <h2>שאלות ותשובות</h2>
         <div class="faq-container">
             <details><summary>האם הפגישה כרוכה בתשלום?</summary><div class="faq-content">לא, פגישת ההיכרות ללא עלות וללא התחייבות.</div></details>
@@ -603,7 +504,7 @@ html.size-200 { font-size: 32px !important; } /* 200% */
         </div>
     </section>
 
-    <section id="booking" class="reveal" style="scroll-margin-top: 95px; padding-top: 0;">
+    <section id="booking" class="reveal" style="scroll-margin-top: 75px; padding-top: 0;">
         <div style="text-align: center;">
             <p style="color: var(--gold); font-weight: 700; margin-bottom: 10px;">תהיה יותר טוב מהתירוצים שלך.</p>
             <h2>קביעת פגישה אישית</h2>
@@ -838,6 +739,24 @@ html.size-200 { font-size: 32px !important; } /* 200% */
 
         function toggleLinks() {
             document.body.classList.toggle('underline-links');
+        }
+
+        // פונקציה לפתיחת תמונה מהגלריה בגדול
+        function openLightbox(src) {
+            const lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            // עיצוב ה-Lightbox (שחור שקוף על כל המסך)
+            lightbox.style = "position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:20000; display:flex; align-items:center; justify-content:center; cursor:zoom-out; padding:20px;";
+
+            // הוספת התמונה
+            lightbox.innerHTML = `
+                <img src="${src}" style="max-width:100%; max-height:90vh; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,0.5); object-fit:contain;">
+                <span style="position:absolute; top:20px; right:20px; color:white; font-size:30px; cursor:pointer;">&times;</span>
+            `;
+
+            // סגירה בלחיצה
+            lightbox.onclick = () => lightbox.remove();
+            document.body.appendChild(lightbox);
         }
 
         // סגירה בלחיצה מחוץ לתפריט
