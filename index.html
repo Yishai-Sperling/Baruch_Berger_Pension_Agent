@@ -1614,9 +1614,11 @@
         const cardW = card.offsetWidth + 24;
         const visible = window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1;
         const maxSlide = Math.max(0, totalSlides - visible);
-        currentSlide = Math.max(0, Math.min(currentSlide + dir, maxSlide));
-        // loop back
-        if (dir > 0 && currentSlide >= maxSlide) currentSlide = 0;
+ 
+        currentSlide += dir;
+        if (currentSlide > maxSlide) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = maxSlide;
+ 
         grid.style.transform = `translateX(${currentSlide * cardW}px)`;
         resetAutoSlide();
     }
