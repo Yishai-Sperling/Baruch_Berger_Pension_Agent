@@ -462,6 +462,14 @@
         display: block;
         background: #000;
     }
+
+    .video-wrapper video:fullscreen {
+        object-fit: contain !important;
+    }
+    .video-wrapper video:-webkit-full-screen {
+    object-fit: contain !important;
+    }
+        
     /* Gold corner accent */
     .video-frame::before {
         content: '';
