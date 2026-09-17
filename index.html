@@ -1019,12 +1019,19 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+        gap: 22px;
     }
     .footer-card-front img {
         height: 82px;
         width: auto;
         filter: brightness(10);
         opacity: 0.85;
+    }
+    .footer-card-front img.hti-badge {
+        height: 68px;
+        filter: none;
+        opacity: 1;
+        border-radius: 8px;
     }
     .footer-divider {
         width: 1px;
@@ -1494,6 +1501,7 @@
         <div class="footer-card">
             <div class="footer-card-front">
                 <img src="logo.png" alt="לוגו ברוך ברגר">
+                <img src="hti-logo.png" alt="לוגו hti" class="hti-badge">
             </div>
             <div class="footer-divider"></div>
             <div class="footer-card-back">
